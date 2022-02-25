@@ -113,5 +113,9 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "**/*.{js,ts}": "eslint --fix"
+  },
+  "resolutions": {
+    "sass-lint/eslint/shelljs": ">=0.8.5",
+    "sass-lint/merge": ">=2.1.1"
   }
 }
