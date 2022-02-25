@@ -1,16 +1,20 @@
 {
-  "extends": [
-    "config:base"
-  ],
-
+  "groupName": "all dependencies",
+  "separateMajorMinor": false,
+  "groupSlug": "all",
   "packageRules": [
     {
-      "updateTypes": [
-        "minor",
-        "patch",
-        "major"
+      "matchPackagePatterns": [
+        "*"
       ],
-      "automerge": false
+      "groupName": "all dependencies",
+      "groupSlug": "all"
     }
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": false
+  }
 }
+
+
+
