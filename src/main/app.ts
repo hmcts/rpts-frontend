@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 });
 
 glob
-  .sync(__dirname + '/routes/**/*.+(ts|js)')
+  .sync(__dirname + '/controllers/**/*.+(ts|js)')
   .map(filename => require(filename))
   .forEach(route => route.default(app));
 
