@@ -14,9 +14,9 @@ describe('Smoke Test', () => {
             'Accept-Encoding': 'gzip',
           },
         });
-        expect(response.data).includes('<h1 class="govuk-heading-xl">Default page template</h1>');
-      } catch {
-        fail('Heading not present and/or correct');
+        expect(response.data).includes('<h1 class="govuk-heading-xl">RPTS</h1>');
+      } catch (ex) {
+        fail('Heading not present and/or correct: reason is: ' + ex);
       }
     });
   });
