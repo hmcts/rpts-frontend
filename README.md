@@ -1,13 +1,4 @@
-# RPTS Frontend
-
-## Purpose
-
-The RPTS frontend application.
-
-
-## Setup
-
-Located in `./bin/init.sh`. Simply run and follow the explanation how to execute it.
+# rpts-frontend
 
 ## Getting Started
 
@@ -141,9 +132,9 @@ Make sure you have those values set correctly for your application.
 
 ### Healthcheck
 
-The application exposes a health endpoint (https://localhost:3100/health), created with the use of
+The application exposes a health endpoint (https://localhost:3120/health), created with the use of
 [Nodejs Healthcheck](https://github.com/hmcts/nodejs-healthcheck) library. This endpoint is defined
-in [health.ts](src/main/routes/health.ts) file. Make sure you adjust it correctly in your application.
+in [health.ts](src/main/controllers/health.ts) file. Make sure you adjust it correctly in your application.
 In particular, remember to replace the sample check with checks specific to your frontend app,
 e.g. the ones verifying the state of each service it depends on.
 
