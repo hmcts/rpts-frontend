@@ -10,6 +10,9 @@ node_modules/
 *log
 .DS_Store
 
+functional-output
+smoke-output
+
 src/main/public/assets/images/lib/*
 src/main/public/js/lib/**/*.js
 src/main/public/stylesheets/lib/*
