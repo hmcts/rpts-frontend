@@ -116,6 +116,9 @@
   },
   "resolutions": {
     "sass-lint/eslint/shelljs": ">=0.8.5",
-    "sass-lint/merge": ">=2.1.1"
+    "sass-lint/merge": ">=2.1.1",
+    "tsconfig-paths/minimist": ">=1.2.6",
+    "config/json5/minimist": ">=1.2.6",
+    "sass-lint/gonzales-pe-sl/minimist": ">=1.2.6"
   }
 }
