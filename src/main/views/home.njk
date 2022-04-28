@@ -1,7 +1,72 @@
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "macros/csrf.njk" import csrfProtection %}
+
 {% extends "template.njk" %}
 
 {% block content %}
-  <h1 class="govuk-heading-xl">RPTS</h1>
-  <h3>Welcome to HMCTS RPTS</h3>
-  <h4>This is a work in progress</h4>
+
+  <form id="addNewCourtForm" method="POST">
+    {{ csrfProtection(csrfToken) }}
+    {# <input id="serviceCentreSelection" name="serviceCentreSelection" type="hidden" value= {{ serviceAreaChecked }}> #}
+
+    <h1 class="govuk-heading-xl">RTPS - Postcode Search</h1>
+
+    {% if errorMsg != '' %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: errorMsg
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    <p class="govuk-body-m">
+      You can use this service to retrieve address and local authority district code information
+      for a provided postcode.
+    </p>
+
+    <p class="govuk-body-m">
+      This will use a combination of an Ordinance Survey and public
+      National Statistics Postcode data to return the required results.
+    </p>
+
+    {% set postcodeErrorDesc = false %}
+    {% if emptyValueFound %}
+      {% if postcodeEntered == '' %}
+        {% set postcodeErrorDesc = { text: 'A postcode value is required. For example: TQ1 1BS' } %}
+      {% endif %}
+    {% endif %}
+
+    {{ govukInput({
+      label: {
+        text: "Postcode:",
+        classes: "govuk-label--m",
+        isPageHeading: false
+      },
+      hint: {
+        text: "Postcode entered can be case insensitive, and spaces are not significant."
+      },
+      value: postcodeEntered,
+      id: "searchPostcode",
+      name: "searchPostcode",
+      errorMessage: postcodeErrorDesc,
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {{ govukButton({
+      text: "Search",
+      name: "searchPostcodeBtn",
+      attributes: { id: 'searchPostcodeBtn' }
+    }) }}
+  </form>
+
+  {# Update element container to be updated with results from the search #}
+  <div id='searchResults'></div>
 {% endblock %}
