@@ -31,9 +31,9 @@ export class Helmet {
           fontSrc: [self, 'data:'],
           imgSrc: [self, googleAnalyticsDomain],
           objectSrc: [self],
-          scriptSrc: [self, googleAnalyticsDomain, "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='"],
-          styleSrc: [self],
-        },
+          scriptSrc: [self, googleAnalyticsDomain, "'unsafe-eval'", "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='"],
+          styleSrc: [self]
+        }
       })
     );
   }
