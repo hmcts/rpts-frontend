@@ -2,15 +2,17 @@ import { Application } from 'express';
 
 export default function (app: Application): void {
   app.get('/', (req, res) => {
-
-    res.render('home',  getOptions('', '',
-      false, false));
+    res.render('home');
   });
 
-  app.get('/:postcode/results', (req, res) => {
+  app.get('/search', (req, res) => {
 
-    res.render('home',  getOptions('', req.params.postcode,
-      false, false));
+    console.log(req.query);
+
+    const postcode = req.query.postcode ? req.query.postcode as string :  '';
+
+    res.render('search/content',  getOptions('', postcode,
+      postcode == '' && !req.query.initial, false));
   });
 
   function getOptions(errorMsg: string,  postcodeEntered: string,

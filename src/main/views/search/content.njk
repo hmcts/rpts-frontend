@@ -1,0 +1,58 @@
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+<h1 class="govuk-heading-xl">RTPS - Postcode Search</h1>
+
+{% if errorMsg != '' %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: [
+      {
+        text: errorMsg
+      }
+    ]
+  }) }}
+{% endif %}
+
+<p class="govuk-body-m">
+  You can use this service to retrieve address and local authority district code information
+  for a provided postcode.
+</p>
+
+<p class="govuk-body-m">
+  This will use a combination of an Ordinance Survey and public
+  National Statistics Postcode data to return the required results.
+</p>
+
+{% set postcodeErrorDesc = false %}
+{% if emptyValueFound %}
+  {% if postcodeEntered == '' %}
+    {% set postcodeErrorDesc = { text: 'A postcode value is required. For example: TQ1 1BS' } %}
+  {% endif %}
+{% endif %}
+
+{{ govukInput({
+  label: {
+    text: "Postcode:",
+    classes: "govuk-label--m",
+    isPageHeading: false
+  },
+  hint: {
+    text: "Postcode entered can be case insensitive, and spaces are not significant."
+  },
+  value: postcodeEntered,
+  id: "postcode",
+  name: "postcode",
+  errorMessage: postcodeErrorDesc,
+  classes: "govuk-input--width-10"
+}) }}
+
+{{ govukButton({
+  text: "Search",
+  name: "searchPostcodeBtn",
+  attributes: { id: 'searchPostcodeBtn' }
+}) }}
