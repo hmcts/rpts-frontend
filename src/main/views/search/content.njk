@@ -29,6 +29,9 @@
 </p>
 
 {% set postcodeErrorDesc = false %}
+{% if postcodeInvalidFormat %}
+  {% set postcodeErrorDesc = { text: 'A valid postcode is required. For example, in the format of: TQ1 1BS. Please note that partial postcodes are not valid.' } %}
+{% endif %}
 {% if emptyValueFound %}
   {% if postcodeEntered == '' %}
     {% set postcodeErrorDesc = { text: 'A postcode value is required. For example: TQ1 1BS' } %}
@@ -56,3 +59,5 @@
   name: "searchPostcodeBtn",
   attributes: { id: 'searchPostcodeBtn' }
 }) }}
+
+{{ addressInfo.addresses[0].DPA.ADDRESS }}

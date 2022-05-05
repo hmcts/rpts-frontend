@@ -5,5 +5,10 @@
   },
   "appInsights": {
     "instrumentationKey": false
+  },
+  "services": {
+    "api": {
+      "url": "http://localhost:4000"
+    }
   }
 }
