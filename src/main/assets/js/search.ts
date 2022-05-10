@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import {AjaxErrorHandler} from './ajaxErrorHandler';
+
+import { AjaxErrorHandler } from './ajaxErrorHandler';
 
 export class SearchController {
-
   private formId = '#getAddressInformation';
   private main = '#main';
 
@@ -12,28 +12,29 @@ export class SearchController {
 
   private initialize(): void {
     $(() => {
-      this.getAddressContent({'postcode' : '', 'initial': true}, true)
+      this.getAddressContent({ postcode: '', initial: true }, true);
     });
   }
 
   private getAddressContent(data: any, initial: boolean) {
-      $.ajax({
-        url:  '/search',
-        method: 'get',
-        data: data
-      }).done((res) => {
+    $.ajax({
+      url: '/search',
+      method: 'get',
+      data,
+    })
+      .done(res => {
         $(this.main).html(res);
         if (initial) {
-          this.setUpSearchEventHandler()
+          this.setUpSearchEventHandler();
         }
-      }).fail((response: any) =>
-        AjaxErrorHandler.handleError(response, 'GET address information failed.'));
+      })
+      .fail((response: any) => AjaxErrorHandler.handleError(response, 'GET address information failed.'));
   }
 
   private setUpSearchEventHandler(): void {
     $(this.formId).on('submit', (e: any) => {
       e.preventDefault();
-      this.getAddressContent($(e.target).serialize(), false)
+      this.getAddressContent($(e.target).serialize(), false);
     });
   }
 }

@@ -1,7 +1,7 @@
 import '../scss/main.scss';
-import '../js/search'
 import { initAll } from 'govuk-frontend';
-import { SearchController } from './search';
+
+import { SearchController } from '../js/search';
 
 initAll();
 new SearchController();

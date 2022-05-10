@@ -1,15 +1,14 @@
-const { Logger } = require('@hmcts/nodejs-logging');
 import { AxiosError, AxiosInstance } from 'axios';
+
 import { AddressInfo } from '../types/AddressInfo';
 
-export class RptsApi {
+const { Logger } = require('@hmcts/nodejs-logging');
 
+export class RptsApi {
   private readonly baseURL = '/v1/search';
   private readonly logger = Logger.getLogger('app');
 
-  constructor(
-    private readonly axios: AxiosInstance,
-  ) {}
+  constructor(private readonly axios: AxiosInstance) {}
 
   public getCourts(postcode: string): Promise<AddressInfo> {
     return this.axios
