@@ -60,21 +60,32 @@
   attributes: { id: 'searchPostcodeBtn' }
 }) }}
 
-<p class="govuk-body-m">
-  Local Authority: 4 Char Code: {{ addressInfo.fourCharLaCode }}
-</p>
+{% if addressInfo.fourCharLaCode %}
 
-<p class="govuk-body-m">
-  Local Authority: 9 Char Code: {{ addressInfo.nineCharLaCode }}
-</p>
+<div class="results">
 
-<p class="govuk-body-m">
-  Addresses:
+  <p class="govuk-label--m">
+    Results:
+  </p>
 
-   {% for address in addressInfo.addresses %}
+  <p class="govuk-body-m">
+    Local Authority: 4 Char Code: {{ addressInfo.fourCharLaCode }}
+  </p>
 
-     {{ address.DPA.ADDRESS }}
-     <br>
+  <p class="govuk-body-m">
+    Local Authority: 9 Char Code: {{ addressInfo.nineCharLaCode }}
+  </p>
 
-   {% endfor %}
-</p>
+  <p class="govuk-body-m">
+    Addresses:
+
+     {% for address in addressInfo.addresses %}
+
+       {{ address.DPA.ADDRESS }}
+       <br>
+
+     {% endfor %}
+  </p>
+</div>
+
+{% endif %}

@@ -116,10 +116,11 @@
     "**/*.{js,ts}": "eslint --fix"
   },
   "resolutions": {
+    "ansi-regex": "^6.0.1",
+    "moment": ">=2.29.2",
+    "async": ">=2.6.4",
     "sass-lint/eslint/shelljs": ">=0.8.5",
     "sass-lint/merge": ">=2.1.1",
-    "tsconfig-paths/minimist": ">=1.2.6",
-    "config/json5/minimist": ">=1.2.6",
-    "sass-lint/gonzales-pe-sl/minimist": ">=1.2.6"
+    "minimist": ">=1.2.6"
   }
 }
