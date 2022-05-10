@@ -60,4 +60,21 @@
   attributes: { id: 'searchPostcodeBtn' }
 }) }}
 
-{{ addressInfo.addresses[0].DPA.ADDRESS }}
+<p class="govuk-body-m">
+  Local Authority: 4 Char Code: {{ addressInfo.fourCharLaCode }}
+</p>
+
+<p class="govuk-body-m">
+  Local Authority: 9 Char Code: {{ addressInfo.nineCharLaCode }}
+</p>
+
+<p class="govuk-body-m">
+  Addresses:
+
+   {% for address in addressInfo.addresses %}
+
+     {{ address.DPA.ADDRESS }}
+     <br>
+
+   {% endfor %}
+</p>
