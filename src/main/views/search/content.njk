@@ -4,6 +4,7 @@
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 <h1 class="govuk-heading-xl">RTPS - Postcode Search</h1>
 
@@ -61,31 +62,133 @@
 }) }}
 
 {% if addressInfo.fourCharLaCode %}
+  <div class="results">
 
-<div class="results">
+    <p class="govuk-label--m">
+      Results:
+    </p>
 
-  <p class="govuk-label--m">
-    Results:
-  </p>
+    {{ govukInput({
+      label: {
+        text: "Local Authority: 4 Char Code",
+        classes: "govuk-label--s",
+        isPageHeading: false
+      },
+      value: addressInfo.fourCharLaCode,
+      id: "fourCharCode",
+      name: "fourCharCode",
+      classes: "govuk-input--width-10"
+    }) }}
 
-  <p class="govuk-body-m">
-    Local Authority: 4 Char Code: {{ addressInfo.fourCharLaCode }}
-  </p>
+    {{ govukInput({
+      label: {
+        text: "Local Authority: 9 Char Code",
+        classes: "govuk-label--s",
+        isPageHeading: false
+      },
+      value: addressInfo.nineCharLaCode,
+      id: "nineCharCode",
+      name: "nineCharCode",
+      classes: "govuk-input--width-10"
+    }) }}
 
-  <p class="govuk-body-m">
-    Local Authority: 9 Char Code: {{ addressInfo.nineCharLaCode }}
-  </p>
+    {#
+    <p class="govuk-body-m">
+      Addresses:
 
-  <p class="govuk-body-m">
-    Addresses:
+       {% for address in addressInfo.addresses %}
 
-     {% for address in addressInfo.addresses %}
+         {{ address.DPA.ADDRESS }}
+         <br>
 
-       {{ address.DPA.ADDRESS }}
-       <br>
+       {% endfor %}
+    </p>
 
-     {% endfor %}
-  </p>
-</div>
+     {% for areaOfLaw in areasOfLaw %}
+      {% set deleteConfirmUrl = deleteUrl + areaOfLaw.id +"?name=" + areaOfLaw.name|urlencode %}
+      {% set areaOfLawItems = (areaOfLawItems.push([
+        {
+          text: areaOfLaw.name
+        },
+        {
+          html: "<a class='govuk-link edit-aol' href=" + editUrl + areaOfLaw.id + ">edit</a>"
+        },
+        {
+          html: "<a class='govuk-link delete-aol' href=" + deleteConfirmUrl + ">delete</a>"
+        }
+      ]), courtItems) %}
+    {% endfor %} #}
 
+    {% set addressItems = [] %}
+    {% for address in addressInfo.addresses %}
+      {% set addressItems = (addressItems.push(
+        {
+          value: address.DPA.ADDRESS,
+          text: address.DPA.ADDRESS
+        }
+      ), addressItemsTemp) %}
+    {% endfor %}
+
+    {{ govukSelect({
+      id: "addressesList",
+      name: "addressesList",
+      label: {
+        text: "Addresses",
+        classes: "govuk-label--s"
+      },
+      items: addressItems
+    }) }}
+
+    {# Adding extra fields to display the address lines #}
+    {{ govukInput({
+      label: {
+        text: "Address Line 1",
+        isPageHeading: false
+      },
+      id: "addressLine1",
+      name: "addressLine1",
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Address Line 2",
+        isPageHeading: false
+      },
+      id: "addressLine2",
+      name: "addressLine2",
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Address Line 3",
+        isPageHeading: false
+      },
+      id: "addressLine3",
+      name: "addressLine3",
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Address Line 4",
+        isPageHeading: false
+      },
+      id: "addressLine4",
+      name: "addressLine4",
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Address Line 5",
+        isPageHeading: false
+      },
+      id: "addressLine5",
+      name: "addressLine5",
+      classes: "govuk-input--width-10"
+    }) }}
+
+  </div>
 {% endif %}
