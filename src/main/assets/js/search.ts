@@ -49,12 +49,13 @@ export class SearchController {
   private setUpResultEventHandler(): void {
     $(this.addressesListId).on('change', (e: any) => {
       this.setAddressFields(e.target.value.split(','));
+      // navigator.clipboard.writeText('abcdef'); TODO
     });
   }
 
   private setAddressFields(addressLines: string[]): void {
     console.log(addressLines);
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 7; i++) {
       $(this.addressLine + i).val(addressLines[i - 1]);
     }
   }
