@@ -4,4 +4,9 @@ import { initAll } from 'govuk-frontend';
 import { SearchController } from '../js/search';
 
 initAll();
-new SearchController();
+
+try {
+  new SearchController();
+} catch (e) {
+  console.log('Could not create JS for search page: ' + e);
+}
