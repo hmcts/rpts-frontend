@@ -9,6 +9,5 @@
       "module": "commonjs",
       "strictNullChecks": true,
       "types": ["codeceptjs", "jest"]
-    },
-  "exclude": ["unit/services/utils/*"]
+    }
 }
