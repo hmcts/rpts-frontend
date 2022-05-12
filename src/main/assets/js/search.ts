@@ -41,6 +41,16 @@ export class SearchController {
               .text()
               .split(',')
           );
+
+          // Set the copy buttons bindings
+          this.setBindingsForCopyButtons('#copyFourCharCode', '#fourCharCode');
+          this.setBindingsForCopyButtons('#copyNineCharCode', '#nineCharCode');
+          this.setBindingsForCopyButtons('#copyAddressLine1', '#addressLine1');
+          this.setBindingsForCopyButtons('#copyAddressLine2', '#addressLine2');
+          this.setBindingsForCopyButtons('#copyAddressLine3', '#addressLine3');
+          this.setBindingsForCopyButtons('#copyAddressLine4', '#addressLine4');
+          this.setBindingsForCopyButtons('#copyAddressLine5', '#addressLine5');
+          this.setBindingsForCopyButtons('#copyAddressLine6', '#addressLine6');
         }
       })
       .fail((response: any) => AjaxErrorHandler.handleError(response, 'GET address information failed.'));
@@ -49,12 +59,17 @@ export class SearchController {
   private setUpResultEventHandler(): void {
     $(this.addressesListId).on('change', (e: any) => {
       this.setAddressFields(e.target.value.split(','));
-      // navigator.clipboard.writeText('abcdef'); TODO
+    });
+  }
+
+  private setBindingsForCopyButtons(copyElement: string, elementToCopyTextFrom: string): void {
+    $(copyElement).on('click', (e: any) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(<string>$(elementToCopyTextFrom).val()).then(r => r);
     });
   }
 
   private setAddressFields(addressLines: string[]): void {
-    console.log(addressLines);
     for (let i = 1; i < 7; i++) {
       $(this.addressLine + i).val(addressLines[i - 1]);
     }

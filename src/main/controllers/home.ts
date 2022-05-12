@@ -11,7 +11,7 @@ export default function (app: Application): void {
   });
 
   app.get('/search', (req, res) => {
-    const postcode = req.query.postcode ? (req.query.postcode as string) : '';
+    const postcode = req.query.postcode ? (req.query.postcode as string).trim() : '';
     const postcodeIsValid = postcodeIsValidFormat(postcode);
 
     if (postcode === '' || !postcodeIsValid) {
