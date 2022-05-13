@@ -144,7 +144,7 @@ describe('HomeControllerTest', () => {
     const req = mockRequest();
     req.query = {
       postcode: '',
-      initial: true
+      initial: true,
     };
     const res = mockResponse();
 
@@ -187,7 +187,7 @@ describe('HomeControllerTest', () => {
     const req = mockRequest();
     req.query = {
       postcode: 'mosh postcode',
-      initial: true
+      initial: true,
     };
     const res = mockResponse();
 

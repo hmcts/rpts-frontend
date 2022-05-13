@@ -12,7 +12,7 @@ export class HomeService {
         HomeService.getOptions(
           '',
           postcode,
-          postcode === '' && !req.query.initial,      // cater for first page render
+          postcode === '' && !req.query.initial, // cater for first page render
           !postcodeIsValid && !req.query.initial, // cater for first page render
           {}
         )
