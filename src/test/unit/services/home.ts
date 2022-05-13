@@ -214,7 +214,7 @@ describe('HomeControllerTest', () => {
 
     axios.get.mockResolvedValueOnce({
       data: {
-        addressInfo
+        addressInfo,
       },
     });
 
