@@ -204,4 +204,74 @@ describe('HomeControllerTest', () => {
       postcodeInvalidFormat: false,
     });
   });
+
+  test('Should get address results and render the page if postcode is valid', async () => {
+    const req = mockRequest();
+    req.query = {
+      postcode: 'TQ1 1BX',
+    };
+    const res = mockResponse();
+
+    axios.get.mockResolvedValueOnce({
+      data: {
+        addressInfo
+      },
+    });
+
+    await HomeService.getSearchResults(req, res, new RptsApi(axios));
+
+    expect(res.render).toBeCalledWith('search/content', {
+      addressInfo: { addressInfo },
+      emptyValueFound: false,
+      errorMsg: '',
+      postcodeEntered: 'TQ1 1BX',
+      postcodeInvalidFormat: false,
+    });
+  });
+
+  test('Should not get address results and render if a server exception occurs from rpts-api', async () => {
+    const req = mockRequest();
+    req.query = {
+      postcode: 'TQ1 1BX',
+    };
+    const res = mockResponse();
+
+    const errorResponse = mockResponse();
+    errorResponse.request = { res: { statusCode: 500 } };
+
+    axios.get = jest.fn().mockRejectedValue(errorResponse);
+
+    await HomeService.getSearchResults(req, res, new RptsApi(axios));
+
+    expect(res.render).toBeCalledWith('search/content', {
+      addressInfo: {},
+      emptyValueFound: false,
+      errorMsg: 'Internal error: please contact your system administrator',
+      postcodeEntered: 'TQ1 1BX',
+      postcodeInvalidFormat: false,
+    });
+  });
+
+  test('Should not get address results and render if a not found exception occurs from rpts-api', async () => {
+    const req = mockRequest();
+    req.query = {
+      postcode: 'TQ1 1BX',
+    };
+    const res = mockResponse();
+
+    const errorResponse = mockResponse();
+    errorResponse.request = { res: { statusCode: 404 } };
+
+    axios.get = jest.fn().mockRejectedValue(errorResponse);
+
+    await HomeService.getSearchResults(req, res, new RptsApi(axios));
+
+    expect(res.render).toBeCalledWith('search/content', {
+      addressInfo: {},
+      emptyValueFound: false,
+      errorMsg: 'No details found for provided postcode: TQ1 1BX',
+      postcodeEntered: 'TQ1 1BX',
+      postcodeInvalidFormat: false,
+    });
+  });
 });

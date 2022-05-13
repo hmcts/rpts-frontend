@@ -19,7 +19,7 @@ export class HomeService {
       );
     }
 
-    api
+    return api
       .getCourts(postcode)
       .then((value: AddressInfo) => {
         return res.render(
@@ -33,7 +33,7 @@ export class HomeService {
           HomeService.getOptions(
             err.request.res.statusCode === 500
               ? 'Internal error: please contact your system administrator'
-              : 'No details found for provided postcode',
+              : 'No details found for provided postcode: ' + postcode,
             postcode,
             postcode === '' && !req.query.initial,
             false,
