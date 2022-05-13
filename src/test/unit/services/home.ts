@@ -139,4 +139,69 @@ describe('HomeControllerTest', () => {
       postcodeInvalidFormat: true,
     });
   });
+
+  test('Should not get address results and render the page if postcode empty initial', async () => {
+    const req = mockRequest();
+    req.query = {
+      postcode: '',
+      initial: true
+    };
+    const res = mockResponse();
+
+    const axiosResponse = { data: addressInfo };
+    axios.get.mockResolvedValue(axiosResponse);
+
+    await HomeService.getSearchResults(req, res, new RptsApi(axios));
+
+    expect(res.render).toBeCalledWith('search/content', {
+      addressInfo: {},
+      emptyValueFound: false,
+      errorMsg: '',
+      postcodeEntered: '',
+      postcodeInvalidFormat: false,
+    });
+  });
+
+  test('Should not get address results and render the page if postcode is not valid', async () => {
+    const req = mockRequest();
+    req.query = {
+      postcode: 'mosh postcode',
+    };
+    const res = mockResponse();
+
+    const axiosResponse = { data: addressInfo };
+    axios.get.mockResolvedValue(axiosResponse);
+
+    await HomeService.getSearchResults(req, res, new RptsApi(axios));
+
+    expect(res.render).toBeCalledWith('search/content', {
+      addressInfo: {},
+      emptyValueFound: false,
+      errorMsg: '',
+      postcodeEntered: 'mosh postcode',
+      postcodeInvalidFormat: true,
+    });
+  });
+
+  test('Should not get address results and render the page if postcode is not valid initial', async () => {
+    const req = mockRequest();
+    req.query = {
+      postcode: 'mosh postcode',
+      initial: true
+    };
+    const res = mockResponse();
+
+    const axiosResponse = { data: addressInfo };
+    axios.get.mockResolvedValue(axiosResponse);
+
+    await HomeService.getSearchResults(req, res, new RptsApi(axios));
+
+    expect(res.render).toBeCalledWith('search/content', {
+      addressInfo: {},
+      emptyValueFound: false,
+      errorMsg: '',
+      postcodeEntered: 'mosh postcode',
+      postcodeInvalidFormat: false,
+    });
+  });
 });
