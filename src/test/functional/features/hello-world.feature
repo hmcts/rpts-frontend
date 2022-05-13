@@ -2,4 +2,4 @@ Feature: Initial Functional test
 
     Scenario: The home page loads
         When I go to '/'
-        Then the page should include 'RPTS'
+        Then the page should include 'RTPS - Postcode Search'

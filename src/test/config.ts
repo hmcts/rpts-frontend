@@ -12,7 +12,7 @@ process.on('unhandledRejection', reason => {
     Gherkin: {
       features: './features/**/*.feature',
       steps: [
-          '../steps/common.ts',
+          '../functional/steps/common.ts',
       ],
     },
     helpers: {},
@@ -28,4 +28,4 @@ process.on('unhandledRejection', reason => {
       waitForNavigation: 'networkidle0',
       ignoreHTTPSErrors: true,
     },
-  };  
+  };
