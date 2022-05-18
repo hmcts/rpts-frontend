@@ -5,14 +5,14 @@ process.on('unhandledRejection', reason => {
 
   export const config = {
     TEST_URL: process.env.TEST_URL || 'http://localhost:3120',
-    TestHeadlessBrowser: process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : true,
+    TestHeadlessBrowser: process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : false,
     TestSlowMo: 250,
     WaitForTimeout: 10000,
 
     Gherkin: {
-      features: './features/**/*.feature',
+      features: './features/**/postcode-search.feature',
       steps: [
-          '../functional/steps/common.ts',
+          '../functional/steps/postcode-search.ts',
       ],
     },
     helpers: {},
