@@ -19,8 +19,8 @@ export const config = {
       browser: 'chromium',
       waitForNavigation: 'domcontentloaded',
       waitForAction: 1000,
-      getPageTimeout: 10000,
-      waitForTimeout: 10000,
+      getPageTimeout: 30000,
+      waitForTimeout: 30000,
       windowSize: '1366x784',
       ignoreHTTPSErrors: true
     }
