@@ -1,5 +1,6 @@
-import { config as testConfig } from '../../config';
 import { expect } from 'chai';
+
+import { config as testConfig } from '../../config';
 
 const { I } = inject();
 
