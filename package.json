@@ -32,6 +32,7 @@
     "@types/express": "^4.17.9",
     "@types/glob": "^7.2.0",
     "@types/helmet": "^4.0.0",
+    "@types/jquery": "^3.5.14",
     "@types/lodash": "^4.14.178",
     "@types/node": "^17.0.10",
     "@types/nunjucks": "^3.2.1",
@@ -47,7 +48,7 @@
     "glob": "^7.1.6",
     "govuk-frontend": "^4.0.1",
     "helmet": "^5.0.1",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.20",
     "nunjucks": "^3.2.2",
     "require-directory": "^2.1.1",
@@ -62,6 +63,7 @@
     "@babel/preset-env": "^7.16.10",
     "@types/chai-as-promised": "^7.1.1",
     "@types/jest": "^27.4.0",
+    "@types/jest-when": "^2.7.3",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
@@ -73,7 +75,7 @@
     "copy-webpack-plugin": "^10.2.1",
     "css-loader": "^6.5.1",
     "debug": "^4.1.1",
-    "eslint": "^8.0.0",
+    "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.0.0",
@@ -115,10 +117,11 @@
     "**/*.{js,ts}": "eslint --fix"
   },
   "resolutions": {
+    "ansi-regex": "^3.0.1",
+    "moment": ">=2.29.2",
+    "async": ">=2.6.4",
     "sass-lint/eslint/shelljs": ">=0.8.5",
     "sass-lint/merge": ">=2.1.1",
-    "tsconfig-paths/minimist": ">=1.2.6",
-    "config/json5/minimist": ">=1.2.6",
-    "sass-lint/gonzales-pe-sl/minimist": ">=1.2.6"
+    "minimist": ">=1.2.6"
   }
 }

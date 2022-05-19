@@ -20,9 +20,10 @@ module.exports = {
   },
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
   rules: {
+    'jest/no-standalone-expect': 'warn',
     '@typescript-eslint/array-type': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-unused-vars': [
       'error',
