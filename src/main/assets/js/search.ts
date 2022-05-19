@@ -58,7 +58,7 @@ export class SearchController {
       })
       .fail((response: any) => {
         $(this.searchPostcodeBtn).prop('disabled', false);
-        AjaxErrorHandler.handleError(response, 'GET address information failed.')
+        AjaxErrorHandler.handleError(response, 'GET address information failed.');
       });
   }
 
