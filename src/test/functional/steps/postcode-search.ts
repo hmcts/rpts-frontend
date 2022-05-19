@@ -45,6 +45,7 @@ Then('I should see the address {string}', async (address: string) => {
 });
 
 Then('I should see the error message containing {string}', async (errMsg: string) => {
+  I.waitForText(errMsg);
   I.see(errMsg);
 });
 
