@@ -1,9 +1,18 @@
+import { config as testConfig } from '../../config';
 import { expect } from 'chai';
 
 const { I } = inject();
 
+export const iAmOnPage = (text: string): void => {
+  const url = new URL(text, testConfig.TEST_URL);
+  if (!url.searchParams.has('lng')) {
+    url.searchParams.set('lng', 'en');
+  }
+  I.amOnPage(url.toString());
+};
+
 Given('I go to RPTS postcode search page', () => {
-  I.amOnPage('http://localhost:3120/?lng=en');
+  iAmOnPage('/');
 });
 
 Then('the page should include {string}', (text: string) => {

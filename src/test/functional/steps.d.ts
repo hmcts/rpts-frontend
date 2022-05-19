@@ -2,7 +2,7 @@
 
 declare namespace CodeceptJS {
   interface SupportObject { I: I }
-  interface Methods extends Playwright {}
+  interface Methods extends Puppeteer {}
   interface I extends WithTranslation<Methods> {}
   namespace Translation {
     interface Actions {}
