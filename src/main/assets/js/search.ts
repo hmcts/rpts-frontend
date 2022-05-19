@@ -56,7 +56,10 @@ export class SearchController {
           this.setBindingsForCopyButtons('#copyAddressLine6', '#addressLine6');
         }
       })
-      .fail((response: any) => AjaxErrorHandler.handleError(response, 'GET address information failed.'));
+      .fail((response: any) => {
+        $(this.searchPostcodeBtn).prop('disabled', false);
+        AjaxErrorHandler.handleError(response, 'GET address information failed.');
+      });
   }
 
   private setUpResultEventHandler(): void {
@@ -81,7 +84,7 @@ export class SearchController {
   private setUpSearchEventHandler(): void {
     $(this.formId).on('submit', (e: any) => {
       e.preventDefault();
-      this.getAddressContent($(e.target).serialize(), false);
+      this.getAddressContent({ postcode: $('#postcode').val() }, false);
     });
   }
 }
