@@ -4,7 +4,7 @@ process.on('unhandledRejection', reason => {
 });
 
 const testUrl = process.env.TEST_URL || 'http://localhost:3120';
-const testHeadlessBrowser = process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : false;
+const testHeadlessBrowser = process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : true;
 const waitForTimeout = 10000;
 
 export const config = {
