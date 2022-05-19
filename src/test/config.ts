@@ -21,7 +21,8 @@ export const config = {
       waitForAction: 1000,
       getPageTimeout: 10000,
       waitForTimeout: 10000,
-      windowSize: '1366x784'
+      windowSize: '1366x784',
+      ignoreHTTPSErrors: true
     }
   },
   Gherkin: {
