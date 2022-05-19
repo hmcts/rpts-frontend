@@ -2,7 +2,7 @@ Feature: postcode search
 
   Background:
     When I go to RPTS postcode search page
-    Then I should see the text 'RTPS - Postcode Search'
+    Then I should see the text 'RPTS - Postcode Search'
 
   Scenario: retrieve address and local authority district code with valid postcode
     Then I entered post code 'bd9 6sg'
@@ -21,13 +21,4 @@ Feature: postcode search
     Then I entered post code 'aa1 2aa'
     Then I click search button
     Then I should see the error message containing 'No details found for provided postcode: aa1 2aa'
-
-  Scenario: copy 4 character code to clipboard
-    Then I entered post code 'bd9 6sg'
-    Then I click search button
-    Then I click copy button next to 4 character code text box
-
-
-
-
-
+    
