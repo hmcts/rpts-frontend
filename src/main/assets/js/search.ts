@@ -20,6 +20,7 @@ export class SearchController {
   }
 
   private getAddressContent(data: any, initial: boolean) {
+    $('#searchPostcodeBtn').prop('disabled', true);
     $.ajax({
       url: '/search',
       method: 'get',
@@ -27,6 +28,7 @@ export class SearchController {
     })
       .done(res => {
         $(this.main).html(res);
+        $('#searchPostcodeBtn').prop('disabled', false);
         if (initial) {
           this.setUpSearchEventHandler();
         } else {
