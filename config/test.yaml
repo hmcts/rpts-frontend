@@ -1,0 +1,7 @@
+security:
+  referrerPolicy: 'origin'
+services:
+  api:
+    url: RPTS_API_URL
+appInsights:
+  instrumentationKey:
