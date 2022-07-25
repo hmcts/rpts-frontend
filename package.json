@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
-    "@hmcts/nodejs-healthcheck": "^1.7.0",
-    "@hmcts/nodejs-logging": "^3.0.2",
-    "@hmcts/properties-volume": "^0.0.13",
+    "@hmcts/nodejs-healthcheck": "^1.7.3",
+    "@hmcts/nodejs-logging": "^4.0.4",
+    "@hmcts/properties-volume": "^0.0.14",
     "@types/config": "^0.0.41",
     "@types/cookie-parser": "^1.4.2",
     "@types/csurf": "^1.9.36",
@@ -118,10 +118,13 @@
   },
   "resolutions": {
     "ansi-regex": "^3.0.1",
-    "moment": ">=2.29.2",
+    "moment": ">=2.29.4",
     "async": ">=2.6.4",
     "sass-lint/eslint/shelljs": ">=0.8.5",
     "sass-lint/merge": ">=2.1.1",
-    "minimist": ">=1.2.6"
+    "minimist": ">=1.2.6",
+    "playwright/playwright-core/jpeg-js": ">=0.4.4",
+    "html-webpack-plugin/html-minifier-terser/terser": ">=5.14.2",
+    "webpack/terser-webpack-plugin/terser": ">=5.14.2"
   }
 }
