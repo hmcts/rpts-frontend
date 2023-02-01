@@ -3,6 +3,14 @@ node_modules/
 .sass-cache
 *.css
 
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 .idea/
 *.iml
 
