@@ -1,4 +1,5 @@
 options:
-  max-warnings: 2000
+  max-warnings: 100
 files:
-  include: 'src/**/*.scss'
+  include: '../src/**/*.scss'
+  exclude: '../src/main/views/govuk/**'
