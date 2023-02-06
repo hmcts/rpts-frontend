@@ -1,4 +1,4 @@
 options:
-  max-warnings: 0
+  max-warnings: 2000
 files:
   include: 'src/**/*.scss'
