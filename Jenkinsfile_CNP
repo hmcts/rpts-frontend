@@ -16,7 +16,6 @@ withPipeline(type, product, component) {
   enableSlackNotifications('#rpts-build')
 
   afterAlways('build') {
-    yarnBuilder.yarn('rebuild puppeteer')
     yarnBuilder.yarn('build')
   }
 }
