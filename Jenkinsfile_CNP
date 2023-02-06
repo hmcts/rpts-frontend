@@ -13,7 +13,7 @@ withPipeline(type, product, component) {
   disableLegacyDeployment()
   syncBranchesWithMaster(branchesToSync)
 
-  afterSuccess('build') {
+  afterAlways('build') {
     yarnBuilder.yarn('build')
   }
 }
