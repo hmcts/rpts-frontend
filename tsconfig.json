@@ -17,8 +17,9 @@
     "baseUrl": "src/main",
     "paths": {
       "router/*": ["router/*"],
-      "routes/*": ["routes/*"]
-    }
+      "routes/*": ["controllers/*"]
+    },
+    "typeRoots": ["./node_modules/@types"]
   },
   "exclude": ["**/*.test.ts", "**/codecept.conf.ts", "**/__mocks__/*"]
 }
