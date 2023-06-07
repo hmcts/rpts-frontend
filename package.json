@@ -117,11 +117,12 @@
     "moment": ">=2.29.4",
     "async": ">=2.6.4",
     "sass-lint/merge": ">=2.1.1",
-    "minimist": ">=1.2.6"
+    "minimist": ">=1.2.6",
+    "minimatch": ">=3.0.5"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "**/*.{js,ts}": "eslint --fix"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.6.0"
 }
