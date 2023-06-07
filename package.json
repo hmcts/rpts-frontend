@@ -117,8 +117,7 @@
     "moment": ">=2.29.4",
     "async": ">=2.6.4",
     "sass-lint/merge": ">=2.1.1",
-    "minimist": ">=1.2.6",
-    "minimatch": ">=3.0.5"
+    "minimist": ">=1.2.6"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
