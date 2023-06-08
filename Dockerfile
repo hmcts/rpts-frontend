@@ -2,6 +2,8 @@
 FROM hmctspublic.azurecr.io/base/node:16-alpine as base
 COPY --chown=hmcts:hmcts . .
 
+RUN corepack enable
+
 # ---- Build image ----
 FROM base as build
 RUN yarn install && yarn build:prod
