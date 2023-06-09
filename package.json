@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.20.0"
   },
   "scripts": {
     "start": "NODE_ENV=production ./node_modules/.bin/ts-node -r tsconfig-paths/register src/main/server.ts",
@@ -35,7 +35,7 @@
     "@types/jquery": "^3.5.14",
     "@types/lodash": "^4.14.178",
     "@types/node": "^17.0.10",
-    "@types/nunjucks": "^3.2.1",
+    "@types/nunjucks": "^3.2.2",
     "@types/require-directory": "^2.1.1",
     "@types/serve-favicon": "^2.5.1",
     "applicationinsights": "^2.2.0",
@@ -45,12 +45,12 @@
     "csurf": "^1.11.0",
     "express": "^4.17.2",
     "express-nunjucks": "^2.2.5",
-    "glob": "^7.1.6",
+    "glob": "^7.2.3",
     "govuk-frontend": "^4.0.1",
     "helmet": "^5.0.1",
     "jquery": "^3.6.0",
     "lodash": "^4.17.20",
-    "nunjucks": "^3.2.2",
+    "nunjucks": "^3.2.4",
     "require-directory": "^2.1.1",
     "serve-favicon": "^2.5.0",
     "ts-node": "^10.4.0",
@@ -123,5 +123,5 @@
     "**/*": "prettier --write --ignore-unknown",
     "**/*.{js,ts}": "eslint --fix"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.6.0"
 }
