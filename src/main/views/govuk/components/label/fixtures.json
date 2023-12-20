@@ -7,6 +7,8 @@
                 "text": "National Insurance number"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label\">\n  National Insurance number\n</label>"
         },
         {
@@ -16,6 +18,8 @@
                 "text": "National Insurance number"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label govuk-label--s\">\n  National Insurance number\n</label>"
         },
         {
@@ -25,6 +29,8 @@
                 "classes": "govuk-label--xl"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label govuk-label--xl\">\n  National Insurance number\n</label>"
         },
         {
@@ -34,6 +40,8 @@
                 "classes": "govuk-label--l"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label govuk-label--l\">\n  National Insurance number\n</label>"
         },
         {
@@ -43,6 +51,8 @@
                 "classes": "govuk-label--m"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label govuk-label--m\">\n  National Insurance number\n</label>"
         },
         {
@@ -52,6 +62,8 @@
                 "classes": "govuk-label--s"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label govuk-label--s\">\n  National Insurance number\n</label>"
         },
         {
@@ -62,7 +74,9 @@
                 "isPageHeading": true
             },
             "hidden": false,
-            "html": "<h1 class=\"govuk-label-wrapper\">\n  <label class=\"govuk-label govuk-label--xl\">\n    National Insurance number\n  </label>\n  </h1>"
+            "description": "",
+            "previewLayoutModifiers": [],
+            "html": "<h1 class=\"govuk-label-wrapper\"><label class=\"govuk-label govuk-label--xl\">\n    National Insurance number\n  </label>\n  </h1>"
         },
         {
             "name": "as page heading l",
@@ -72,7 +86,9 @@
                 "isPageHeading": true
             },
             "hidden": false,
-            "html": "<h1 class=\"govuk-label-wrapper\">\n  <label class=\"govuk-label govuk-label--l\">\n    National Insurance number\n  </label>\n  </h1>"
+            "description": "",
+            "previewLayoutModifiers": [],
+            "html": "<h1 class=\"govuk-label-wrapper\"><label class=\"govuk-label govuk-label--l\">\n    National Insurance number\n  </label>\n  </h1>"
         },
         {
             "name": "as page heading m",
@@ -82,7 +98,9 @@
                 "isPageHeading": true
             },
             "hidden": false,
-            "html": "<h1 class=\"govuk-label-wrapper\">\n  <label class=\"govuk-label govuk-label--m\">\n    National Insurance number\n  </label>\n  </h1>"
+            "description": "",
+            "previewLayoutModifiers": [],
+            "html": "<h1 class=\"govuk-label-wrapper\"><label class=\"govuk-label govuk-label--m\">\n    National Insurance number\n  </label>\n  </h1>"
         },
         {
             "name": "as page heading s",
@@ -92,7 +110,9 @@
                 "isPageHeading": true
             },
             "hidden": false,
-            "html": "<h1 class=\"govuk-label-wrapper\">\n  <label class=\"govuk-label govuk-label--s\">\n    National Insurance number\n  </label>\n  </h1>"
+            "description": "",
+            "previewLayoutModifiers": [],
+            "html": "<h1 class=\"govuk-label-wrapper\"><label class=\"govuk-label govuk-label--s\">\n    National Insurance number\n  </label>\n  </h1>"
         },
         {
             "name": "as page heading without class",
@@ -101,12 +121,16 @@
                 "isPageHeading": true
             },
             "hidden": false,
-            "html": "<h1 class=\"govuk-label-wrapper\">\n  <label class=\"govuk-label\">\n    National Insurance number\n  </label>\n  </h1>"
+            "description": "",
+            "previewLayoutModifiers": [],
+            "html": "<h1 class=\"govuk-label-wrapper\"><label class=\"govuk-label\">\n    National Insurance number\n  </label>\n  </h1>"
         },
         {
             "name": "empty",
             "options": {},
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": ""
         },
         {
@@ -116,6 +140,8 @@
                 "classes": "extra-class one-more-class"
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label extra-class one-more-class\">\n  National Insurance number\n</label>"
         },
         {
@@ -124,6 +150,8 @@
                 "text": "National Insurance number, <em>NINO</em>"
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label\">\n  National Insurance number, &lt;em&gt;NINO&lt;/em&gt;\n</label>"
         },
         {
@@ -132,16 +160,20 @@
                 "html": "National Insurance number <em>NINO</em>"
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label\">\n  National Insurance number <em>NINO</em>\n</label>"
         },
         {
             "name": "for",
             "options": {
-                "for": "#dummy-input",
+                "for": "test-target-element",
                 "text": "National Insurance number"
             },
             "hidden": true,
-            "html": "<label class=\"govuk-label\" for=\"#dummy-input\">\n  National Insurance number\n</label>"
+            "description": "",
+            "previewLayoutModifiers": [],
+            "html": "<label class=\"govuk-label\" for=\"test-target-element\">\n  National Insurance number\n</label>"
         },
         {
             "name": "attributes",
@@ -153,6 +185,8 @@
                 }
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<label class=\"govuk-label\" first-attribute=\"foo\" second-attribute=\"bar\">\n  National Insurance number\n</label>"
         }
     ]

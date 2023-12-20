@@ -7,6 +7,8 @@
                 "href": "#"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<a href=\"#\" class=\"govuk-back-link\">Back</a>"
         },
         {
@@ -16,7 +18,22 @@
                 "text": "Back to home"
             },
             "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<a href=\"#\" class=\"govuk-back-link\">Back to home</a>"
+        },
+        {
+            "name": "inverse",
+            "options": {
+                "classes": "govuk-back-link--inverse",
+                "href": "#"
+            },
+            "hidden": false,
+            "description": "",
+            "previewLayoutModifiers": [
+                "inverse"
+            ],
+            "html": "<a href=\"#\" class=\"govuk-back-link govuk-back-link--inverse\">Back</a>"
         },
         {
             "name": "classes",
@@ -25,6 +42,8 @@
                 "href": "#"
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<a href=\"#\" class=\"govuk-back-link app-back-link--custom-class\">Back</a>"
         },
         {
@@ -34,6 +53,8 @@
                 "href": "#"
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<a href=\"#\" class=\"govuk-back-link\">&lt;b&gt;Home&lt;/b&gt;</a>"
         },
         {
@@ -43,6 +64,8 @@
                 "href": "#"
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<a href=\"#\" class=\"govuk-back-link\"><b>Back</b></a>"
         },
         {
@@ -56,6 +79,8 @@
                 }
             },
             "hidden": true,
+            "description": "",
+            "previewLayoutModifiers": [],
             "html": "<a href=\"#\" class=\"govuk-back-link\" data-test=\"attribute\" aria-label=\"Back to home\"><b>Back to home</b></a>"
         }
     ]
