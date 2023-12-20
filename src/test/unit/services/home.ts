@@ -131,7 +131,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: {},
       emptyValueFound: true,
       errorMsg: '',
@@ -153,7 +153,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: {},
       emptyValueFound: false,
       errorMsg: '',
@@ -174,7 +174,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: {},
       emptyValueFound: false,
       errorMsg: '',
@@ -196,7 +196,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: {},
       emptyValueFound: false,
       errorMsg: '',
@@ -220,7 +220,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: { addressInfo },
       emptyValueFound: false,
       errorMsg: '',
@@ -243,7 +243,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: {},
       emptyValueFound: false,
       errorMsg: 'Internal error: please contact your system administrator',
@@ -266,7 +266,7 @@ describe('HomeControllerTest', () => {
 
     await HomeService.getSearchResults(req, res, new RptsApi(axios));
 
-    expect(res.render).toBeCalledWith('search/content', {
+    expect(res.render).toHaveBeenCalledWith('search/content', {
       addressInfo: {},
       emptyValueFound: false,
       errorMsg: 'No details found for provided postcode: TQ1 1BX',

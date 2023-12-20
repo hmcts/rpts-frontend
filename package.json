@@ -113,7 +113,6 @@
     }
   },
   "resolutions": {
-    "ansi-regex": "^6.0.0",
     "moment": ">=2.29.4",
     "async": ">=2.6.4",
     "sass-lint/merge": ">=2.1.1",
