@@ -26,7 +26,7 @@ Then('I entered post code {string}', (postcode: string) => {
 
 Then('I click search button', () => {
   I.click('searchPostcodeBtn');
-  I.waitForText("Result:", 30)
+  I.waitForText('Result:', 30);
 });
 
 Then('I should see the text {string}', (text: string) => {
