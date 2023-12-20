@@ -24,10 +24,13 @@ Then('I entered post code {string}', (postcode: string) => {
   I.fillField('postcode', postcode);
 });
 
-Then('I click search button', () => {
-  I.click('searchPostcodeBtn');
+Then('I wait for the results to show', () => {
   I.wait(10);
   I.waitForElement('#nineCharCode', 30);
+});
+
+Then('I click search button', () => {
+  I.click('searchPostcodeBtn');
 });
 
 Then('I should see the text {string}', (text: string) => {

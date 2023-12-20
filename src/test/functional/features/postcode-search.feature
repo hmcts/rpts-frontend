@@ -7,6 +7,7 @@ Feature: postcode search
   Scenario: retrieve address and local authority district code with valid postcode
     Then I entered post code 'bd9 6sg'
     Then I click search button
+    Then I wait for the results to show
     Then I should see the text 'Results:'
     Then I should see the 4 char code '00CX'
     Then I should see the 9 char code 'E08000032'
@@ -21,4 +22,4 @@ Feature: postcode search
     Then I entered post code 'aa1 2aa'
     Then I click search button
     Then I should see the error message containing 'No details found for provided postcode: aa1 2aa'
-    
+
