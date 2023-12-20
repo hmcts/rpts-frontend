@@ -3,13 +3,7 @@
         "name": "homepageUrl",
         "type": "string",
         "required": false,
-        "description": "The URL of the homepage. Defaults to `/`"
-    },
-    {
-        "name": "assetsPath",
-        "type": "string",
-        "required": false,
-        "description": "The public path for the assets folder. If not provided it defaults to /assets/images"
+        "description": "The URL of the homepage. Defaults to `\"/\"`."
     },
     {
         "name": "productName",
@@ -33,7 +27,7 @@
         "name": "navigation",
         "type": "array",
         "required": false,
-        "description": "An array of navigation item objects.",
+        "description": "Can be used to add navigation to the header component.",
         "params": [
             {
                 "name": "text",
@@ -83,7 +77,7 @@
         "name": "menuButtonLabel",
         "type": "string",
         "required": false,
-        "description": "Text for the `aria-label` attribute of the button that opens the mobile navigation, if there is a mobile navigation menu. Defaults to 'Show or hide menu'."
+        "description": "Text for the `aria-label` attribute of the button that opens the mobile navigation, if there is a mobile navigation menu."
     },
     {
         "name": "menuButtonText",

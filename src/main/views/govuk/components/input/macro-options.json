@@ -15,7 +15,7 @@
         "name": "type",
         "type": "string",
         "required": false,
-        "description": "Type of input control to render, for example, a password input control. Defaults to `text`."
+        "description": "Type of input control to render, for example, a password input control. Defaults to `\"text\"`."
     },
     {
         "name": "inputmode",
@@ -30,6 +30,12 @@
         "description": "Optional initial value of the input."
     },
     {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "If `true`, input will be disabled."
+    },
+    {
         "name": "describedBy",
         "type": "string",
         "required": false,
@@ -39,40 +45,40 @@
         "name": "label",
         "type": "object",
         "required": true,
-        "description": "Options for the label component.",
+        "description": "The label used by the text input component.",
         "isComponent": true
     },
     {
         "name": "hint",
         "type": "object",
         "required": false,
-        "description": "Options for the hint component.",
+        "description": "Can be used to add a hint to a text input component.",
         "isComponent": true
     },
     {
         "name": "errorMessage",
         "type": "object",
         "required": false,
-        "description": "Options for the error message component. The error message component will not display if you use a falsy value for `errorMessage`, for example `false` or `null`.",
+        "description": "Can be used to add an error message to the text input component. The error message component will not display if you use a falsy value for `errorMessage`, for example `false` or `null`.",
         "isComponent": true
     },
     {
         "name": "prefix",
         "type": "object",
         "required": false,
-        "description": "Options for the prefix element.",
+        "description": "Can be used to add a prefix to the text input component.",
         "params": [
             {
                 "name": "text",
                 "type": "string",
                 "required": true,
-                "description": "Required. If `html` is set, this is not required. Text to use within the label. If `html` is provided, the `text` option will be ignored."
+                "description": "Required. If `html` is set, this is not required. Text to use within the prefix. If `html` is provided, the `text` option will be ignored."
             },
             {
                 "name": "html",
                 "type": "string",
                 "required": true,
-                "description": "Required. If `text` is set, this is not required. HTML to use within the label. If `html` is provided, the `text` option will be ignored."
+                "description": "Required. If `text` is set, this is not required. HTML to use within the prefix. If `html` is provided, the `text` option will be ignored."
             },
             {
                 "name": "classes",
@@ -92,19 +98,19 @@
         "name": "suffix",
         "type": "object",
         "required": false,
-        "description": "Options for the suffix element.",
+        "description": "Can be used to add a suffix to the text input component.",
         "params": [
             {
                 "name": "text",
                 "type": "string",
                 "required": true,
-                "description": "If `html` is set, this is not required. Text to use within the label. If `html` is provided, the `text` option will be ignored."
+                "description": "If `html` is set, this is not required. Text to use within the suffix. If `html` is provided, the `text` option will be ignored."
             },
             {
                 "name": "html",
                 "type": "string",
                 "required": true,
-                "description": "If `text` is set, this is not required. HTML to use within the label. If `html` is provided, the `text` option will be ignored."
+                "description": "If `text` is set, this is not required. HTML to use within the suffix. If `html` is provided, the `text` option will be ignored."
             },
             {
                 "name": "classes",
@@ -124,7 +130,7 @@
         "name": "formGroup",
         "type": "object",
         "required": false,
-        "description": "Options for the form-group wrapper.",
+        "description": "Additional options for the form group containing the text-input component.",
         "params": [
             {
                 "name": "classes",
@@ -150,7 +156,7 @@
         "name": "pattern",
         "type": "string",
         "required": false,
-        "description": "Attribute to [provide a regular expression pattern](https://www.w3.org/TR/html51/sec-forms.html#the-pattern-attribute), used to match allowed character combinations for the input value."
+        "description": "Attribute to [provide a regular expression pattern](https://html.spec.whatwg.org/multipage/sec-forms.html#the-pattern-attribute), used to match allowed character combinations for the input value."
     },
     {
         "name": "spellcheck",
