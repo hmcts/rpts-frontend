@@ -27,6 +27,7 @@ Then('I entered post code {string}', (postcode: string) => {
 Then('I click search button', () => {
   I.click('searchPostcodeBtn');
   I.wait(10);
+  I.waitForElement('#nineCharCode', 30);
 });
 
 Then('I should see the text {string}', (text: string) => {
