@@ -21,7 +21,7 @@
     "cichecks": "yarn && yarn build && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y"
   },
   "dependencies": {
-    "@hmcts/info-provider": "^1.0.0",
+    "@hmcts/info-provider": "^1.1.0",
     "@hmcts/nodejs-healthcheck": "^1.7.3",
     "@hmcts/nodejs-logging": "^4.0.4",
     "@hmcts/properties-volume": "^1.1.0",
@@ -119,7 +119,10 @@
     "sass-lint/merge": ">=2.1.1",
     "minimist": ">=1.2.6",
     "semver": ">=6.3.1",
-    "axios/follow-redirects": ">=1.15.6"
+    "axios/follow-redirects": ">=1.15.6",
+    "express": ">=4.19.2",
+    "tar": ">=6.2.1",
+    "ip": ">=2.0.1"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
