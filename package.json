@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.1.0",
-    "@hmcts/nodejs-healthcheck": "^1.7.3",
+    "@hmcts/nodejs-healthcheck": "^1.8.4",
     "@hmcts/nodejs-logging": "^4.0.4",
     "@hmcts/properties-volume": "^1.1.0",
     "@types/config": "^3.0.0",
