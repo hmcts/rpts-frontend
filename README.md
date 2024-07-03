@@ -1,5 +1,20 @@
 # rpts-frontend
 
+## Table of Contents
+
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Running the application](#running-the-application)
+  * [Running with Docker](#running-with-docker)
+* [Developing](#developing)
+  * [Code style](#code-style)
+  * [Running the tests](#running-the-tests)
+  * [Security](#security)
+    * [CSRF prevention](#csrf-prevention)
+    * [Helmet](#helmet)
+  * [Healthcheck](#healthcheck)
+* [License](#license)
+
 ## Getting Started
 
 ### Prerequisites
