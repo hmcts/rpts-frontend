@@ -84,6 +84,11 @@ For more information about the latest NSPL data, search and download from [here]
 Example: National Statistics Postcode Lookup - 2021 Census (May 2024) for the UK
 
 
+### OS Data - Ordnance Survey
+
+The application uses OS Places API for postcode searching to make sure we're getting the most up to date data.
+See [here](https://www.ordnancesurvey.co.uk/products/os-places-api#overview) for more information.
+
 ## Developing
 
 ### Code style
