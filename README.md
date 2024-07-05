@@ -1,5 +1,23 @@
 # rpts-frontend
 
+## Table of Contents
+
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Running the application](#running-the-application)
+  * [Running with Docker](#running-with-docker)
+  * [Endpoints](#endpoints)
+  * [NSPL Data - National Statistics Postcode Lookup](#nspl-data---national-statistics-postcode-lookup)
+  * [OS Data - Ordnance Survey](#os-data---ordnance-survey)
+* [Developing](#developing)
+  * [Code style](#code-style)
+  * [Running the tests](#running-the-tests)
+  * [Security](#security)
+    * [CSRF prevention](#csrf-prevention)
+    * [Helmet](#helmet)
+  * [Healthcheck](#healthcheck)
+* [License](#license)
+
 ## Getting Started
 
 ### Prerequisites
@@ -51,6 +69,26 @@ This will start the frontend container exposing the application's port
 
 In order to test if the application is up, you can visit http://localhost:3120 in your browser.
 You should get a very basic home page (no styles, etc.).
+
+### Endpoints
+
+Returns a NsplAddress entity which contains address lines and local authority information.
+```
+GET /v1/search/<postcode>
+```
+
+### NSPL Data - National Statistics Postcode Lookup
+
+The application uses the NSPL data to provide address information based on the postcode.
+For more information about the latest NSPL data, search and download from [here](https://geoportal.statistics.gov.uk/search?sort=Date%20Updated%7Cmodified%7Cdesc).
+
+Example: National Statistics Postcode Lookup - 2021 Census (May 2024) for the UK
+
+
+### OS Data - Ordnance Survey
+
+The application uses OS Places API for postcode searching to make sure we're getting the most up to date data.
+See [here](https://www.ordnancesurvey.co.uk/products/os-places-api#overview) for more information.
 
 ## Developing
 
