@@ -14452,7 +14452,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pa11y@npm:^6.1.1":
+"pa11y@npm:^6.2.3":
   version: 6.2.3
   resolution: "pa11y@npm:6.2.3"
   dependencies:
@@ -16071,7 +16071,7 @@ __metadata:
     node-sass: ^9.0.0
     nodemon: ^3.1.4
     nunjucks: ^3.2.4
-    pa11y: ^6.1.1
+    pa11y: ^6.2.3
     playwright: ^1.45.3
     prettier: ^3.3.3
     request: ^2.88.2
