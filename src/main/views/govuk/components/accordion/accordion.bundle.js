@@ -4,75 +4,44 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.GOVUKFrontend = {}));
 })(this, (function (exports) { 'use strict';
 
-  function normaliseString(value, property) {
-    const trimmedValue = value ? value.trim() : '';
-    let output;
-    let outputType = property == null ? void 0 : property.type;
-    if (!outputType) {
-      if (['true', 'false'].includes(trimmedValue)) {
-        outputType = 'boolean';
-      }
-      if (trimmedValue.length > 0 && isFinite(Number(trimmedValue))) {
-        outputType = 'number';
-      }
-    }
-    switch (outputType) {
-      case 'boolean':
-        output = trimmedValue === 'true';
-        break;
-      case 'number':
-        output = Number(trimmedValue);
-        break;
-      default:
-        output = value;
-    }
-    return output;
-  }
-
-  /**
-   * @typedef {import('./index.mjs').SchemaProperty} SchemaProperty
-   */
-
   function mergeConfigs(...configObjects) {
+    function flattenObject(configObject) {
+      const flattenedObject = {};
+      function flattenLoop(obj, prefix) {
+        for (const [key, value] of Object.entries(obj)) {
+          const prefixedKey = prefix ? `${prefix}.${key}` : key;
+          if (value && typeof value === 'object') {
+            flattenLoop(value, prefixedKey);
+          } else {
+            flattenedObject[prefixedKey] = value;
+          }
+        }
+      }
+      flattenLoop(configObject);
+      return flattenedObject;
+    }
     const formattedConfigObject = {};
     for (const configObject of configObjects) {
-      for (const key of Object.keys(configObject)) {
-        const option = formattedConfigObject[key];
-        const override = configObject[key];
-        if (isObject(option) && isObject(override)) {
-          formattedConfigObject[key] = mergeConfigs(option, override);
-        } else {
-          formattedConfigObject[key] = override;
-        }
+      const obj = flattenObject(configObject);
+      for (const [key, value] of Object.entries(obj)) {
+        formattedConfigObject[key] = value;
       }
     }
     return formattedConfigObject;
   }
-  function extractConfigByNamespace(Component, dataset, namespace) {
-    const property = Component.schema.properties[namespace];
-    if ((property == null ? void 0 : property.type) !== 'object') {
-      return;
-    }
-    const newObject = {
-      [namespace]: ({})
-    };
-    for (const [key, value] of Object.entries(dataset)) {
-      let current = newObject;
+  function extractConfigByNamespace(configObject, namespace) {
+    const newObject = {};
+    for (const [key, value] of Object.entries(configObject)) {
       const keyParts = key.split('.');
-      for (const [index, name] of keyParts.entries()) {
-        if (typeof current === 'object') {
-          if (index < keyParts.length - 1) {
-            if (!isObject(current[name])) {
-              current[name] = {};
-            }
-            current = current[name];
-          } else if (key !== namespace) {
-            current[name] = normaliseString(value);
-          }
+      if (keyParts[0] === namespace) {
+        if (keyParts.length > 1) {
+          keyParts.shift();
         }
+        const newKey = keyParts.join('.');
+        newObject[newKey] = value;
       }
     }
-    return newObject[namespace];
+    return newObject;
   }
   function isSupported($scope = document.body) {
     if (!$scope) {
@@ -80,26 +49,12 @@
     }
     return $scope.classList.contains('govuk-frontend-supported');
   }
-  function isArray(option) {
-    return Array.isArray(option);
-  }
-  function isObject(option) {
-    return !!option && typeof option === 'object' && !isArray(option);
-  }
 
   /**
    * Schema for component config
    *
    * @typedef {object} Schema
-   * @property {{ [field: string]: SchemaProperty | undefined }} properties - Schema properties
    * @property {SchemaCondition[]} [anyOf] - List of schema conditions
-   */
-
-  /**
-   * Schema property for component config
-   *
-   * @typedef {object} SchemaProperty
-   * @property {'string' | 'boolean' | 'number' | 'object'} type - Property type
    */
 
   /**
@@ -110,15 +65,26 @@
    * @property {string} errorMessage - Error message when required config fields not provided
    */
 
-  function normaliseDataset(Component, dataset) {
+  function normaliseString(value) {
+    if (typeof value !== 'string') {
+      return value;
+    }
+    const trimmedValue = value.trim();
+    if (trimmedValue === 'true') {
+      return true;
+    }
+    if (trimmedValue === 'false') {
+      return false;
+    }
+    if (trimmedValue.length > 0 && isFinite(Number(trimmedValue))) {
+      return Number(trimmedValue);
+    }
+    return value;
+  }
+  function normaliseDataset(dataset) {
     const out = {};
-    for (const [field, property] of Object.entries(Component.schema.properties)) {
-      if (field in dataset) {
-        out[field] = normaliseString(dataset[field], property);
-      }
-      if ((property == null ? void 0 : property.type) === 'object') {
-        out[field] = extractConfigByNamespace(Component, dataset, field);
-      }
+    for (const [key, value] of Object.entries(dataset)) {
+      out[key] = normaliseString(value);
     }
     return out;
   }
@@ -182,21 +148,18 @@
       if (!lookupKey) {
         throw new Error('i18n: lookup key missing');
       }
-      let translation = this.translations[lookupKey];
-      if (typeof (options == null ? void 0 : options.count) === 'number' && typeof translation === 'object') {
-        const translationPluralForm = translation[this.getPluralSuffix(lookupKey, options.count)];
-        if (translationPluralForm) {
-          translation = translationPluralForm;
-        }
+      if (typeof (options == null ? void 0 : options.count) === 'number') {
+        lookupKey = `${lookupKey}.${this.getPluralSuffix(lookupKey, options.count)}`;
       }
-      if (typeof translation === 'string') {
-        if (translation.match(/%{(.\S+)}/)) {
+      const translationString = this.translations[lookupKey];
+      if (typeof translationString === 'string') {
+        if (translationString.match(/%{(.\S+)}/)) {
           if (!options) {
             throw new Error('i18n: cannot replace placeholders in string if no option data provided');
           }
-          return this.replacePlaceholders(translation, options);
+          return this.replacePlaceholders(translationString, options);
         }
-        return translation;
+        return translationString;
       }
       return lookupKey;
     }
@@ -224,15 +187,12 @@
       if (!isFinite(count)) {
         return 'other';
       }
-      const translation = this.translations[lookupKey];
       const preferredForm = this.hasIntlPluralRulesSupport() ? new Intl.PluralRules(this.locale).select(count) : this.selectPluralFormUsingFallbackRules(count);
-      if (typeof translation === 'object') {
-        if (preferredForm in translation) {
-          return preferredForm;
-        } else if ('other' in translation) {
-          console.warn(`i18n: Missing plural form ".${preferredForm}" for "${this.locale}" locale. Falling back to ".other".`);
-          return 'other';
-        }
+      if (`${lookupKey}.${preferredForm}` in this.translations) {
+        return preferredForm;
+      } else if (`${lookupKey}.other` in this.translations) {
+        console.warn(`i18n: Missing plural form ".${preferredForm}" for "${this.locale}" locale. Falling back to ".other".`);
+        return 'other';
       }
       throw new Error(`i18n: Plural form ".other" is required for "${this.locale}" locale`);
     }
@@ -407,6 +367,7 @@
       this.sectionSummaryFocusClass = 'govuk-accordion__section-summary-focus';
       this.sectionContentClass = 'govuk-accordion__section-content';
       this.$sections = void 0;
+      this.browserSupportsSessionStorage = false;
       this.$showAllButton = null;
       this.$showAllIcon = null;
       this.$showAllText = null;
@@ -418,8 +379,8 @@
         });
       }
       this.$module = $module;
-      this.config = mergeConfigs(Accordion.defaults, config, normaliseDataset(Accordion, $module.dataset));
-      this.i18n = new I18n(this.config.i18n);
+      this.config = mergeConfigs(Accordion.defaults, config, normaliseDataset($module.dataset));
+      this.i18n = new I18n(extractConfigByNamespace(this.config, 'i18n'));
       const $sections = this.$module.querySelectorAll(`.${this.sectionClass}`);
       if (!$sections.length) {
         throw new ElementError({
@@ -428,9 +389,11 @@
         });
       }
       this.$sections = $sections;
+      this.browserSupportsSessionStorage = helper.checkForSessionStorage();
       this.initControls();
       this.initSectionHeaders();
-      this.updateShowAllButton(this.areAllSectionsOpen());
+      const areAllSectionsOpen = this.checkIfAllSectionsOpen();
+      this.updateShowAllButton(areAllSectionsOpen);
     }
     initControls() {
       this.$showAllButton = document.createElement('button');
@@ -487,8 +450,8 @@
       $button.setAttribute('type', 'button');
       $button.setAttribute('aria-controls', `${this.$module.id}-content-${index + 1}`);
       for (const attr of Array.from($span.attributes)) {
-        if (attr.name !== 'id') {
-          $button.setAttribute(attr.name, attr.value);
+        if (attr.nodeName !== 'id') {
+          $button.setAttribute(attr.nodeName, `${attr.nodeValue}`);
         }
       }
       const $headingText = document.createElement('span');
@@ -497,7 +460,7 @@
       const $headingTextFocus = document.createElement('span');
       $headingTextFocus.classList.add(this.sectionHeadingTextFocusClass);
       $headingText.appendChild($headingTextFocus);
-      Array.from($span.childNodes).forEach($child => $headingTextFocus.appendChild($child));
+      $headingTextFocus.innerHTML = $span.innerHTML;
       const $showHideToggle = document.createElement('span');
       $showHideToggle.classList.add(this.sectionShowHideToggleClass);
       $showHideToggle.setAttribute('data-nosnippet', '');
@@ -512,16 +475,16 @@
       $showHideToggleFocus.appendChild($showHideText);
       $button.appendChild($headingText);
       $button.appendChild(this.getButtonPunctuationEl());
-      if ($summary) {
+      if ($summary != null && $summary.parentNode) {
         const $summarySpan = document.createElement('span');
         const $summarySpanFocus = document.createElement('span');
         $summarySpanFocus.classList.add(this.sectionSummaryFocusClass);
         $summarySpan.appendChild($summarySpanFocus);
         for (const attr of Array.from($summary.attributes)) {
-          $summarySpan.setAttribute(attr.name, attr.value);
+          $summarySpan.setAttribute(attr.nodeName, `${attr.nodeValue}`);
         }
-        Array.from($summary.childNodes).forEach($child => $summarySpanFocus.appendChild($child));
-        $summary.remove();
+        $summarySpanFocus.innerHTML = $summary.innerHTML;
+        $summary.parentNode.replaceChild($summarySpan, $summary);
         $button.appendChild($summarySpan);
         $button.appendChild(this.getButtonPunctuationEl());
       }
@@ -540,15 +503,15 @@
       }
     }
     onSectionToggle($section) {
-      const nowExpanded = !this.isExpanded($section);
-      this.setExpanded(nowExpanded, $section);
-      this.storeState($section, nowExpanded);
+      const expanded = this.isExpanded($section);
+      this.setExpanded(!expanded, $section);
+      this.storeState($section);
     }
     onShowOrHideAllToggle() {
-      const nowExpanded = !this.areAllSectionsOpen();
+      const nowExpanded = !this.checkIfAllSectionsOpen();
       this.$sections.forEach($section => {
         this.setExpanded(nowExpanded, $section);
-        this.storeState($section, nowExpanded);
+        this.storeState($section);
       });
       this.updateShowAllButton(nowExpanded);
     }
@@ -590,13 +553,17 @@
         $section.classList.remove(this.sectionExpandedClass);
         $showHideIcon.classList.add(this.downChevronIconClass);
       }
-      this.updateShowAllButton(this.areAllSectionsOpen());
+      const areAllSectionsOpen = this.checkIfAllSectionsOpen();
+      this.updateShowAllButton(areAllSectionsOpen);
     }
     isExpanded($section) {
       return $section.classList.contains(this.sectionExpandedClass);
     }
-    areAllSectionsOpen() {
-      return Array.from(this.$sections).every($section => this.isExpanded($section));
+    checkIfAllSectionsOpen() {
+      const sectionsCount = this.$sections.length;
+      const expandedSectionCount = this.$module.querySelectorAll(`.${this.sectionExpandedClass}`).length;
+      const areAllSectionsOpen = sectionsCount === expandedSectionCount;
+      return areAllSectionsOpen;
     }
     updateShowAllButton(expanded) {
       if (!this.$showAllButton || !this.$showAllText || !this.$showAllIcon) {
@@ -606,53 +573,68 @@
       this.$showAllText.textContent = expanded ? this.i18n.t('hideAllSections') : this.i18n.t('showAllSections');
       this.$showAllIcon.classList.toggle(this.downChevronIconClass, !expanded);
     }
-
-    /**
-     * Get the identifier for a section
-     *
-     * We need a unique way of identifying each content in the Accordion.
-     * Since an `#id` should be unique and an `id` is required for `aria-`
-     * attributes `id` can be safely used.
-     *
-     * @param {Element} $section - Section element
-     * @returns {string | undefined | null} Identifier for section
-     */
-    getIdentifier($section) {
-      const $button = $section.querySelector(`.${this.sectionButtonClass}`);
-      return $button == null ? void 0 : $button.getAttribute('aria-controls');
-    }
-    storeState($section, isExpanded) {
-      if (!this.config.rememberExpanded) {
-        return;
-      }
-      const id = this.getIdentifier($section);
-      if (id) {
-        try {
-          window.sessionStorage.setItem(id, isExpanded.toString());
-        } catch (exception) {}
+    storeState($section) {
+      if (this.browserSupportsSessionStorage && this.config.rememberExpanded) {
+        const $button = $section.querySelector(`.${this.sectionButtonClass}`);
+        if ($button) {
+          const contentId = $button.getAttribute('aria-controls');
+          const contentState = $button.getAttribute('aria-expanded');
+          if (contentId && contentState) {
+            window.sessionStorage.setItem(contentId, contentState);
+          }
+        }
       }
     }
     setInitialState($section) {
-      if (!this.config.rememberExpanded) {
-        return;
-      }
-      const id = this.getIdentifier($section);
-      if (id) {
-        try {
-          const state = window.sessionStorage.getItem(id);
-          if (state !== null) {
-            this.setExpanded(state === 'true', $section);
+      if (this.browserSupportsSessionStorage && this.config.rememberExpanded) {
+        const $button = $section.querySelector(`.${this.sectionButtonClass}`);
+        if ($button) {
+          const contentId = $button.getAttribute('aria-controls');
+          const contentState = contentId ? window.sessionStorage.getItem(contentId) : null;
+          if (contentState !== null) {
+            this.setExpanded(contentState === 'true', $section);
           }
-        } catch (exception) {}
+        }
       }
     }
     getButtonPunctuationEl() {
       const $punctuationEl = document.createElement('span');
       $punctuationEl.classList.add('govuk-visually-hidden', this.sectionHeadingDividerClass);
-      $punctuationEl.textContent = ', ';
+      $punctuationEl.innerHTML = ', ';
       return $punctuationEl;
     }
   }
+  Accordion.moduleName = 'govuk-accordion';
+  Accordion.defaults = Object.freeze({
+    i18n: {
+      hideAllSections: 'Hide all sections',
+      hideSection: 'Hide',
+      hideSectionAriaLabel: 'Hide this section',
+      showAllSections: 'Show all sections',
+      showSection: 'Show',
+      showSectionAriaLabel: 'Show this section'
+    },
+    rememberExpanded: true
+  });
+  const helper = {
+    /**
+     * Check for `window.sessionStorage`, and that it actually works.
+     *
+     * @returns {boolean} True if session storage is available
+     */
+    checkForSessionStorage: function () {
+      const testString = 'this is the test string';
+      let result;
+      try {
+        window.sessionStorage.setItem(testString, testString);
+        result = window.sessionStorage.getItem(testString) === testString.toString();
+        window.sessionStorage.removeItem(testString);
+        return result;
+      } catch (exception) {
+        return false;
+      }
+    }
+  };
 
   /**
    * Accordion config
@@ -686,32 +668,6 @@
    * @property {string} [showSectionAriaLabel] - The text content appended to the
    *   'Show' button's accessible name when a section is expanded.
    */
-
-  /**
-   * @typedef {import('../../common/index.mjs').Schema} Schema
-   */
-  Accordion.moduleName = 'govuk-accordion';
-  Accordion.defaults = Object.freeze({
-    i18n: {
-      hideAllSections: 'Hide all sections',
-      hideSection: 'Hide',
-      hideSectionAriaLabel: 'Hide this section',
-      showAllSections: 'Show all sections',
-      showSection: 'Show',
-      showSectionAriaLabel: 'Show this section'
-    },
-    rememberExpanded: true
-  });
-  Accordion.schema = Object.freeze({
-    properties: {
-      i18n: {
-        type: 'object'
-      },
-      rememberExpanded: {
-        type: 'boolean'
-      }
-    }
-  });
 
   exports.Accordion = Accordion;
 

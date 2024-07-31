@@ -4,44 +4,6 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.GOVUKFrontend = {}));
 })(this, (function (exports) { 'use strict';
 
-  function getBreakpoint(name) {
-    const property = `--govuk-frontend-breakpoint-${name}`;
-    const value = window.getComputedStyle(document.documentElement).getPropertyValue(property);
-    return {
-      property,
-      value: value || undefined
-    };
-  }
-  function isSupported($scope = document.body) {
-    if (!$scope) {
-      return false;
-    }
-    return $scope.classList.contains('govuk-frontend-supported');
-  }
-
-  /**
-   * Schema for component config
-   *
-   * @typedef {object} Schema
-   * @property {{ [field: string]: SchemaProperty | undefined }} properties - Schema properties
-   * @property {SchemaCondition[]} [anyOf] - List of schema conditions
-   */
-
-  /**
-   * Schema property for component config
-   *
-   * @typedef {object} SchemaProperty
-   * @property {'string' | 'boolean' | 'number' | 'object'} type - Property type
-   */
-
-  /**
-   * Schema condition for component config
-   *
-   * @typedef {object} SchemaCondition
-   * @property {string[]} required - List of required config fields
-   * @property {string} errorMessage - Error message when required config fields not provided
-   */
-
   class GOVUKFrontendError extends Error {
     constructor(...args) {
       super(...args);
@@ -77,6 +39,28 @@
       this.name = 'ElementError';
     }
   }
+
+  function isSupported($scope = document.body) {
+    if (!$scope) {
+      return false;
+    }
+    return $scope.classList.contains('govuk-frontend-supported');
+  }
+
+  /**
+   * Schema for component config
+   *
+   * @typedef {object} Schema
+   * @property {SchemaCondition[]} [anyOf] - List of schema conditions
+   */
+
+  /**
+   * Schema condition for component config
+   *
+   * @typedef {object} SchemaCondition
+   * @property {string[]} required - List of required config fields
+   * @property {string} errorMessage - Error message when required config fields not provided
+   */
 
   class GOVUKFrontendComponent {
     constructor() {
@@ -137,26 +121,16 @@
       }
       this.$menu = $menu;
       this.$menuButton = $menuButton;
-      this.setupResponsiveChecks();
+      this.mql = window.matchMedia('(min-width: 48.0625em)');
+      if ('addEventListener' in this.mql) {
+        this.mql.addEventListener('change', () => this.syncState());
+      } else {
+        this.mql.addListener(() => this.syncState());
+      }
+      this.syncState();
       this.$menuButton.addEventListener('click', () => this.handleMenuButtonClick());
     }
-    setupResponsiveChecks() {
-      const breakpoint = getBreakpoint('desktop');
-      if (!breakpoint.value) {
-        throw new ElementError({
-          componentName: 'Header',
-          identifier: `CSS custom property (\`${breakpoint.property}\`) on pseudo-class \`:root\``
-        });
-      }
-      this.mql = window.matchMedia(`(min-width: ${breakpoint.value})`);
-      if ('addEventListener' in this.mql) {
-        this.mql.addEventListener('change', () => this.checkMode());
-      } else {
-        this.mql.addListener(() => this.checkMode());
-      }
-      this.checkMode();
-    }
-    checkMode() {
+    syncState() {
       if (!this.mql || !this.$menu || !this.$menuButton) {
         return;
       }
@@ -175,7 +149,7 @@
     }
     handleMenuButtonClick() {
       this.menuIsOpen = !this.menuIsOpen;
-      this.checkMode();
+      this.syncState();
     }
   }
   Header.moduleName = 'govuk-header';

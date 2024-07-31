@@ -1,72 +1,27 @@
-function normaliseString(value, property) {
-  const trimmedValue = value ? value.trim() : '';
-  let output;
-  let outputType = property == null ? void 0 : property.type;
-  if (!outputType) {
-    if (['true', 'false'].includes(trimmedValue)) {
-      outputType = 'boolean';
-    }
-    if (trimmedValue.length > 0 && isFinite(Number(trimmedValue))) {
-      outputType = 'number';
-    }
-  }
-  switch (outputType) {
-    case 'boolean':
-      output = trimmedValue === 'true';
-      break;
-    case 'number':
-      output = Number(trimmedValue);
-      break;
-    default:
-      output = value;
-  }
-  return output;
-}
-
-/**
- * @typedef {import('./index.mjs').SchemaProperty} SchemaProperty
- */
-
 function mergeConfigs(...configObjects) {
-  const formattedConfigObject = {};
-  for (const configObject of configObjects) {
-    for (const key of Object.keys(configObject)) {
-      const option = formattedConfigObject[key];
-      const override = configObject[key];
-      if (isObject(option) && isObject(override)) {
-        formattedConfigObject[key] = mergeConfigs(option, override);
-      } else {
-        formattedConfigObject[key] = override;
-      }
-    }
-  }
-  return formattedConfigObject;
-}
-function extractConfigByNamespace(Component, dataset, namespace) {
-  const property = Component.schema.properties[namespace];
-  if ((property == null ? void 0 : property.type) !== 'object') {
-    return;
-  }
-  const newObject = {
-    [namespace]: ({})
-  };
-  for (const [key, value] of Object.entries(dataset)) {
-    let current = newObject;
-    const keyParts = key.split('.');
-    for (const [index, name] of keyParts.entries()) {
-      if (typeof current === 'object') {
-        if (index < keyParts.length - 1) {
-          if (!isObject(current[name])) {
-            current[name] = {};
-          }
-          current = current[name];
-        } else if (key !== namespace) {
-          current[name] = normaliseString(value);
+  function flattenObject(configObject) {
+    const flattenedObject = {};
+    function flattenLoop(obj, prefix) {
+      for (const [key, value] of Object.entries(obj)) {
+        const prefixedKey = prefix ? `${prefix}.${key}` : key;
+        if (value && typeof value === 'object') {
+          flattenLoop(value, prefixedKey);
+        } else {
+          flattenedObject[prefixedKey] = value;
         }
       }
     }
+    flattenLoop(configObject);
+    return flattenedObject;
   }
-  return newObject[namespace];
+  const formattedConfigObject = {};
+  for (const configObject of configObjects) {
+    const obj = flattenObject(configObject);
+    for (const [key, value] of Object.entries(obj)) {
+      formattedConfigObject[key] = value;
+    }
+  }
+  return formattedConfigObject;
 }
 function isSupported($scope = document.body) {
   if (!$scope) {
@@ -74,26 +29,12 @@ function isSupported($scope = document.body) {
   }
   return $scope.classList.contains('govuk-frontend-supported');
 }
-function isArray(option) {
-  return Array.isArray(option);
-}
-function isObject(option) {
-  return !!option && typeof option === 'object' && !isArray(option);
-}
 
 /**
  * Schema for component config
  *
  * @typedef {object} Schema
- * @property {{ [field: string]: SchemaProperty | undefined }} properties - Schema properties
  * @property {SchemaCondition[]} [anyOf] - List of schema conditions
- */
-
-/**
- * Schema property for component config
- *
- * @typedef {object} SchemaProperty
- * @property {'string' | 'boolean' | 'number' | 'object'} type - Property type
  */
 
 /**
@@ -104,15 +45,26 @@ function isObject(option) {
  * @property {string} errorMessage - Error message when required config fields not provided
  */
 
-function normaliseDataset(Component, dataset) {
+function normaliseString(value) {
+  if (typeof value !== 'string') {
+    return value;
+  }
+  const trimmedValue = value.trim();
+  if (trimmedValue === 'true') {
+    return true;
+  }
+  if (trimmedValue === 'false') {
+    return false;
+  }
+  if (trimmedValue.length > 0 && isFinite(Number(trimmedValue))) {
+    return Number(trimmedValue);
+  }
+  return value;
+}
+function normaliseDataset(dataset) {
   const out = {};
-  for (const [field, property] of Object.entries(Component.schema.properties)) {
-    if (field in dataset) {
-      out[field] = normaliseString(dataset[field], property);
-    }
-    if ((property == null ? void 0 : property.type) === 'object') {
-      out[field] = extractConfigByNamespace(Component, dataset, field);
-    }
+  for (const [key, value] of Object.entries(dataset)) {
+    out[key] = normaliseString(value);
   }
   return out;
 }
@@ -164,6 +116,7 @@ class GOVUKFrontendComponent {
   }
 }
 
+const KEY_SPACE = 32;
 const DEBOUNCE_TIMEOUT_IN_SECONDS = 1;
 
 /**
@@ -189,13 +142,13 @@ class Button extends GOVUKFrontendComponent {
       });
     }
     this.$module = $module;
-    this.config = mergeConfigs(Button.defaults, config, normaliseDataset(Button, $module.dataset));
+    this.config = mergeConfigs(Button.defaults, config, normaliseDataset($module.dataset));
     this.$module.addEventListener('keydown', event => this.handleKeyDown(event));
     this.$module.addEventListener('click', event => this.debounce(event));
   }
   handleKeyDown(event) {
     const $target = event.target;
-    if (event.key !== ' ') {
+    if (event.keyCode !== KEY_SPACE) {
       return;
     }
     if ($target instanceof HTMLElement && $target.getAttribute('role') === 'button') {
@@ -224,20 +177,9 @@ class Button extends GOVUKFrontendComponent {
  * @property {boolean} [preventDoubleClick=false] - Prevent accidental double
  *   clicks on submit buttons from submitting forms multiple times.
  */
-
-/**
- * @typedef {import('../../common/index.mjs').Schema} Schema
- */
 Button.moduleName = 'govuk-button';
 Button.defaults = Object.freeze({
   preventDoubleClick: false
-});
-Button.schema = Object.freeze({
-  properties: {
-    preventDoubleClick: {
-      type: 'boolean'
-    }
-  }
 });
 
 export { Button };

@@ -1,4 +1,4 @@
-import { mergeConfigs } from '../../common/index.mjs';
+import { mergeConfigs, extractConfigByNamespace } from '../../common/index.mjs';
 import { normaliseDataset } from '../../common/normalise-dataset.mjs';
 import { ElementError } from '../../errors/index.mjs';
 import { GOVUKFrontendComponent } from '../../govuk-frontend-component.mjs';
@@ -48,6 +48,7 @@ class Accordion extends GOVUKFrontendComponent {
     this.sectionSummaryFocusClass = 'govuk-accordion__section-summary-focus';
     this.sectionContentClass = 'govuk-accordion__section-content';
     this.$sections = void 0;
+    this.browserSupportsSessionStorage = false;
     this.$showAllButton = null;
     this.$showAllIcon = null;
     this.$showAllText = null;
@@ -59,8 +60,8 @@ class Accordion extends GOVUKFrontendComponent {
       });
     }
     this.$module = $module;
-    this.config = mergeConfigs(Accordion.defaults, config, normaliseDataset(Accordion, $module.dataset));
-    this.i18n = new I18n(this.config.i18n);
+    this.config = mergeConfigs(Accordion.defaults, config, normaliseDataset($module.dataset));
+    this.i18n = new I18n(extractConfigByNamespace(this.config, 'i18n'));
     const $sections = this.$module.querySelectorAll(`.${this.sectionClass}`);
     if (!$sections.length) {
       throw new ElementError({
@@ -69,9 +70,11 @@ class Accordion extends GOVUKFrontendComponent {
       });
     }
     this.$sections = $sections;
+    this.browserSupportsSessionStorage = helper.checkForSessionStorage();
     this.initControls();
     this.initSectionHeaders();
-    this.updateShowAllButton(this.areAllSectionsOpen());
+    const areAllSectionsOpen = this.checkIfAllSectionsOpen();
+    this.updateShowAllButton(areAllSectionsOpen);
   }
   initControls() {
     this.$showAllButton = document.createElement('button');
@@ -128,8 +131,8 @@ class Accordion extends GOVUKFrontendComponent {
     $button.setAttribute('type', 'button');
     $button.setAttribute('aria-controls', `${this.$module.id}-content-${index + 1}`);
     for (const attr of Array.from($span.attributes)) {
-      if (attr.name !== 'id') {
-        $button.setAttribute(attr.name, attr.value);
+      if (attr.nodeName !== 'id') {
+        $button.setAttribute(attr.nodeName, `${attr.nodeValue}`);
       }
     }
     const $headingText = document.createElement('span');
@@ -138,7 +141,7 @@ class Accordion extends GOVUKFrontendComponent {
     const $headingTextFocus = document.createElement('span');
     $headingTextFocus.classList.add(this.sectionHeadingTextFocusClass);
     $headingText.appendChild($headingTextFocus);
-    Array.from($span.childNodes).forEach($child => $headingTextFocus.appendChild($child));
+    $headingTextFocus.innerHTML = $span.innerHTML;
     const $showHideToggle = document.createElement('span');
     $showHideToggle.classList.add(this.sectionShowHideToggleClass);
     $showHideToggle.setAttribute('data-nosnippet', '');
@@ -153,16 +156,16 @@ class Accordion extends GOVUKFrontendComponent {
     $showHideToggleFocus.appendChild($showHideText);
     $button.appendChild($headingText);
     $button.appendChild(this.getButtonPunctuationEl());
-    if ($summary) {
+    if ($summary != null && $summary.parentNode) {
       const $summarySpan = document.createElement('span');
       const $summarySpanFocus = document.createElement('span');
       $summarySpanFocus.classList.add(this.sectionSummaryFocusClass);
       $summarySpan.appendChild($summarySpanFocus);
       for (const attr of Array.from($summary.attributes)) {
-        $summarySpan.setAttribute(attr.name, attr.value);
+        $summarySpan.setAttribute(attr.nodeName, `${attr.nodeValue}`);
       }
-      Array.from($summary.childNodes).forEach($child => $summarySpanFocus.appendChild($child));
-      $summary.remove();
+      $summarySpanFocus.innerHTML = $summary.innerHTML;
+      $summary.parentNode.replaceChild($summarySpan, $summary);
       $button.appendChild($summarySpan);
       $button.appendChild(this.getButtonPunctuationEl());
     }
@@ -181,15 +184,15 @@ class Accordion extends GOVUKFrontendComponent {
     }
   }
   onSectionToggle($section) {
-    const nowExpanded = !this.isExpanded($section);
-    this.setExpanded(nowExpanded, $section);
-    this.storeState($section, nowExpanded);
+    const expanded = this.isExpanded($section);
+    this.setExpanded(!expanded, $section);
+    this.storeState($section);
   }
   onShowOrHideAllToggle() {
-    const nowExpanded = !this.areAllSectionsOpen();
+    const nowExpanded = !this.checkIfAllSectionsOpen();
     this.$sections.forEach($section => {
       this.setExpanded(nowExpanded, $section);
-      this.storeState($section, nowExpanded);
+      this.storeState($section);
     });
     this.updateShowAllButton(nowExpanded);
   }
@@ -231,13 +234,17 @@ class Accordion extends GOVUKFrontendComponent {
       $section.classList.remove(this.sectionExpandedClass);
       $showHideIcon.classList.add(this.downChevronIconClass);
     }
-    this.updateShowAllButton(this.areAllSectionsOpen());
+    const areAllSectionsOpen = this.checkIfAllSectionsOpen();
+    this.updateShowAllButton(areAllSectionsOpen);
   }
   isExpanded($section) {
     return $section.classList.contains(this.sectionExpandedClass);
   }
-  areAllSectionsOpen() {
-    return Array.from(this.$sections).every($section => this.isExpanded($section));
+  checkIfAllSectionsOpen() {
+    const sectionsCount = this.$sections.length;
+    const expandedSectionCount = this.$module.querySelectorAll(`.${this.sectionExpandedClass}`).length;
+    const areAllSectionsOpen = sectionsCount === expandedSectionCount;
+    return areAllSectionsOpen;
   }
   updateShowAllButton(expanded) {
     if (!this.$showAllButton || !this.$showAllText || !this.$showAllIcon) {
@@ -247,53 +254,68 @@ class Accordion extends GOVUKFrontendComponent {
     this.$showAllText.textContent = expanded ? this.i18n.t('hideAllSections') : this.i18n.t('showAllSections');
     this.$showAllIcon.classList.toggle(this.downChevronIconClass, !expanded);
   }
-
-  /**
-   * Get the identifier for a section
-   *
-   * We need a unique way of identifying each content in the Accordion.
-   * Since an `#id` should be unique and an `id` is required for `aria-`
-   * attributes `id` can be safely used.
-   *
-   * @param {Element} $section - Section element
-   * @returns {string | undefined | null} Identifier for section
-   */
-  getIdentifier($section) {
-    const $button = $section.querySelector(`.${this.sectionButtonClass}`);
-    return $button == null ? void 0 : $button.getAttribute('aria-controls');
-  }
-  storeState($section, isExpanded) {
-    if (!this.config.rememberExpanded) {
-      return;
-    }
-    const id = this.getIdentifier($section);
-    if (id) {
-      try {
-        window.sessionStorage.setItem(id, isExpanded.toString());
-      } catch (exception) {}
+  storeState($section) {
+    if (this.browserSupportsSessionStorage && this.config.rememberExpanded) {
+      const $button = $section.querySelector(`.${this.sectionButtonClass}`);
+      if ($button) {
+        const contentId = $button.getAttribute('aria-controls');
+        const contentState = $button.getAttribute('aria-expanded');
+        if (contentId && contentState) {
+          window.sessionStorage.setItem(contentId, contentState);
+        }
+      }
     }
   }
   setInitialState($section) {
-    if (!this.config.rememberExpanded) {
-      return;
-    }
-    const id = this.getIdentifier($section);
-    if (id) {
-      try {
-        const state = window.sessionStorage.getItem(id);
-        if (state !== null) {
-          this.setExpanded(state === 'true', $section);
+    if (this.browserSupportsSessionStorage && this.config.rememberExpanded) {
+      const $button = $section.querySelector(`.${this.sectionButtonClass}`);
+      if ($button) {
+        const contentId = $button.getAttribute('aria-controls');
+        const contentState = contentId ? window.sessionStorage.getItem(contentId) : null;
+        if (contentState !== null) {
+          this.setExpanded(contentState === 'true', $section);
         }
-      } catch (exception) {}
+      }
     }
   }
   getButtonPunctuationEl() {
     const $punctuationEl = document.createElement('span');
     $punctuationEl.classList.add('govuk-visually-hidden', this.sectionHeadingDividerClass);
-    $punctuationEl.textContent = ', ';
+    $punctuationEl.innerHTML = ', ';
     return $punctuationEl;
   }
 }
+Accordion.moduleName = 'govuk-accordion';
+Accordion.defaults = Object.freeze({
+  i18n: {
+    hideAllSections: 'Hide all sections',
+    hideSection: 'Hide',
+    hideSectionAriaLabel: 'Hide this section',
+    showAllSections: 'Show all sections',
+    showSection: 'Show',
+    showSectionAriaLabel: 'Show this section'
+  },
+  rememberExpanded: true
+});
+const helper = {
+  /**
+   * Check for `window.sessionStorage`, and that it actually works.
+   *
+   * @returns {boolean} True if session storage is available
+   */
+  checkForSessionStorage: function () {
+    const testString = 'this is the test string';
+    let result;
+    try {
+      window.sessionStorage.setItem(testString, testString);
+      result = window.sessionStorage.getItem(testString) === testString.toString();
+      window.sessionStorage.removeItem(testString);
+      return result;
+    } catch (exception) {
+      return false;
+    }
+  }
+};
 
 /**
  * Accordion config
@@ -327,32 +349,6 @@ class Accordion extends GOVUKFrontendComponent {
  * @property {string} [showSectionAriaLabel] - The text content appended to the
  *   'Show' button's accessible name when a section is expanded.
  */
-
-/**
- * @typedef {import('../../common/index.mjs').Schema} Schema
- */
-Accordion.moduleName = 'govuk-accordion';
-Accordion.defaults = Object.freeze({
-  i18n: {
-    hideAllSections: 'Hide all sections',
-    hideSection: 'Hide',
-    hideSectionAriaLabel: 'Hide this section',
-    showAllSections: 'Show all sections',
-    showSection: 'Show',
-    showSectionAriaLabel: 'Show this section'
-  },
-  rememberExpanded: true
-});
-Accordion.schema = Object.freeze({
-  properties: {
-    i18n: {
-      type: 'object'
-    },
-    rememberExpanded: {
-      type: 'boolean'
-    }
-  }
-});
 
 export { Accordion };
 //# sourceMappingURL=accordion.mjs.map

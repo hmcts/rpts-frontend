@@ -4,14 +4,6 @@ function getFragmentFromUrl(url) {
   }
   return url.split('#').pop();
 }
-function getBreakpoint(name) {
-  const property = `--govuk-frontend-breakpoint-${name}`;
-  const value = window.getComputedStyle(document.documentElement).getPropertyValue(property);
-  return {
-    property,
-    value: value || undefined
-  };
-}
 function isSupported($scope = document.body) {
   if (!$scope) {
     return false;
@@ -23,15 +15,7 @@ function isSupported($scope = document.body) {
  * Schema for component config
  *
  * @typedef {object} Schema
- * @property {{ [field: string]: SchemaProperty | undefined }} properties - Schema properties
  * @property {SchemaCondition[]} [anyOf] - List of schema conditions
- */
-
-/**
- * Schema property for component config
- *
- * @typedef {object} SchemaProperty
- * @property {'string' | 'boolean' | 'number' | 'object'} type - Property type
  */
 
 /**
@@ -104,6 +88,12 @@ class Tabs extends GOVUKFrontendComponent {
     this.$tabs = void 0;
     this.$tabList = void 0;
     this.$tabListItems = void 0;
+    this.keys = {
+      left: 37,
+      right: 39,
+      up: 38,
+      down: 40
+    };
     this.jsHiddenClass = 'govuk-tabs__panel--hidden';
     this.changingHash = false;
     this.boundTabClick = void 0;
@@ -148,14 +138,7 @@ class Tabs extends GOVUKFrontendComponent {
     this.setupResponsiveChecks();
   }
   setupResponsiveChecks() {
-    const breakpoint = getBreakpoint('tablet');
-    if (!breakpoint.value) {
-      throw new ElementError({
-        componentName: 'Tabs',
-        identifier: `CSS custom property (\`${breakpoint.property}\`) on pseudo-class \`:root\``
-      });
-    }
-    this.mql = window.matchMedia(`(min-width: ${breakpoint.value})`);
+    this.mql = window.matchMedia('(min-width: 40.0625em)');
     if ('addEventListener' in this.mql) {
       this.mql.addEventListener('change', () => this.checkMode());
     } else {
@@ -283,18 +266,14 @@ class Tabs extends GOVUKFrontendComponent {
     $panel.id = panelId;
   }
   onTabKeydown(event) {
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-      case 'Left':
-      case 'Up':
+    switch (event.keyCode) {
+      case this.keys.left:
+      case this.keys.up:
         this.activatePreviousTab();
         event.preventDefault();
         break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-      case 'Right':
-      case 'Down':
+      case this.keys.right:
+      case this.keys.down:
         this.activateNextTab();
         event.preventDefault();
         break;

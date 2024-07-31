@@ -1,4 +1,4 @@
-import { mergeConfigs, setFocus } from '../../common/index.mjs';
+import { mergeConfigs } from '../../common/index.mjs';
 import { normaliseDataset } from '../../common/normalise-dataset.mjs';
 import { ElementError } from '../../errors/index.mjs';
 import { GOVUKFrontendComponent } from '../../govuk-frontend-component.mjs';
@@ -25,10 +25,23 @@ class NotificationBanner extends GOVUKFrontendComponent {
       });
     }
     this.$module = $module;
-    this.config = mergeConfigs(NotificationBanner.defaults, config, normaliseDataset(NotificationBanner, $module.dataset));
-    if (this.$module.getAttribute('role') === 'alert' && !this.config.disableAutoFocus) {
-      setFocus(this.$module);
+    this.config = mergeConfigs(NotificationBanner.defaults, config, normaliseDataset($module.dataset));
+    this.setFocus();
+  }
+  setFocus() {
+    if (this.config.disableAutoFocus) {
+      return;
     }
+    if (this.$module.getAttribute('role') !== 'alert') {
+      return;
+    }
+    if (!this.$module.getAttribute('tabindex')) {
+      this.$module.setAttribute('tabindex', '-1');
+      this.$module.addEventListener('blur', () => {
+        this.$module.removeAttribute('tabindex');
+      });
+    }
+    this.$module.focus();
   }
 }
 
@@ -41,20 +54,9 @@ class NotificationBanner extends GOVUKFrontendComponent {
  *   applies if the component has a `role` of `alert` – in other cases the
  *   component will not be focused on page load, regardless of this option.
  */
-
-/**
- * @typedef {import('../../common/index.mjs').Schema} Schema
- */
 NotificationBanner.moduleName = 'govuk-notification-banner';
 NotificationBanner.defaults = Object.freeze({
   disableAutoFocus: false
-});
-NotificationBanner.schema = Object.freeze({
-  properties: {
-    disableAutoFocus: {
-      type: 'boolean'
-    }
-  }
 });
 
 export { NotificationBanner };

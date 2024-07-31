@@ -3,6 +3,7 @@ import { normaliseDataset } from '../../common/normalise-dataset.mjs';
 import { ElementError } from '../../errors/index.mjs';
 import { GOVUKFrontendComponent } from '../../govuk-frontend-component.mjs';
 
+const KEY_SPACE = 32;
 const DEBOUNCE_TIMEOUT_IN_SECONDS = 1;
 
 /**
@@ -28,13 +29,13 @@ class Button extends GOVUKFrontendComponent {
       });
     }
     this.$module = $module;
-    this.config = mergeConfigs(Button.defaults, config, normaliseDataset(Button, $module.dataset));
+    this.config = mergeConfigs(Button.defaults, config, normaliseDataset($module.dataset));
     this.$module.addEventListener('keydown', event => this.handleKeyDown(event));
     this.$module.addEventListener('click', event => this.debounce(event));
   }
   handleKeyDown(event) {
     const $target = event.target;
-    if (event.key !== ' ') {
+    if (event.keyCode !== KEY_SPACE) {
       return;
     }
     if ($target instanceof HTMLElement && $target.getAttribute('role') === 'button') {
@@ -63,20 +64,9 @@ class Button extends GOVUKFrontendComponent {
  * @property {boolean} [preventDoubleClick=false] - Prevent accidental double
  *   clicks on submit buttons from submitting forms multiple times.
  */
-
-/**
- * @typedef {import('../../common/index.mjs').Schema} Schema
- */
 Button.moduleName = 'govuk-button';
 Button.defaults = Object.freeze({
   preventDoubleClick: false
-});
-Button.schema = Object.freeze({
-  properties: {
-    preventDoubleClick: {
-      type: 'boolean'
-    }
-  }
 });
 
 export { Button };

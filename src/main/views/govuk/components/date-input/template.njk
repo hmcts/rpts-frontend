@@ -1,4 +1,3 @@
-{% from "../../macros/attributes.njk" import govukAttributes %}
 {% from "../error-message/macro.njk" import govukErrorMessage %}
 {% from "../fieldset/macro.njk" import govukFieldset %}
 {% from "../hint/macro.njk" import govukHint %}
@@ -7,9 +6,6 @@
 {#- a record of other elements that we need to associate with the input using
   aria-describedby – for example hints or error messages -#}
 {% set describedBy = params.fieldset.describedBy if params.fieldset.describedBy else "" %}
-
-{#- fieldset is false by default -#}
-{% set hasFieldset = true if params.fieldset else false %}
 
 {%- if params.items | length %}
   {% set dateInputItems = params.items %}
@@ -41,7 +37,7 @@
     attributes: params.hint.attributes,
     html: params.hint.html,
     text: params.hint.text
-  }) | trim | indent(2) }}
+  }) | indent(2) | trim }}
 {% endif %}
 {% if params.errorMessage %}
   {% set errorId = params.id + "-error" %}
@@ -53,14 +49,11 @@
     html: params.errorMessage.html,
     text: params.errorMessage.text,
     visuallyHiddenText: params.errorMessage.visuallyHiddenText
-  }) | trim | indent(2) }}
+  }) | indent(2) | trim }}
 {% endif %}
   <div class="govuk-date-input {%- if params.classes %} {{ params.classes }}{% endif %}"
-    {{- govukAttributes(params.attributes) -}}
+    {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}
     {%- if params.id %} id="{{ params.id }}"{% endif %}>
-    {% if params.formGroup.beforeInputs %}
-    {{ params.formGroup.beforeInputs.html | safe | trim | indent(4) if params.formGroup.beforeInputs.html else params.formGroup.beforeInputs.text }}
-    {% endif %}
     {% for item in dateInputItems %}
     <div class="govuk-date-input__item">
       {{ govukInput({
@@ -77,30 +70,28 @@
         autocomplete: item.autocomplete,
         pattern: item.pattern,
         attributes: item.attributes
-      }) | trim | indent(6) }}
+      }) | indent(6) | trim }}
     </div>
-    {% endfor %}
-    {% if params.formGroup.afterInputs %}
-    {{ params.formGroup.afterInputs.html | safe | trim | indent(4) if params.formGroup.afterInputs.html else params.formGroup.afterInputs.text }}
-    {% endif %}
+  {% endfor %}
   </div>
 {% endset -%}
 
-<div class="govuk-form-group {%- if params.errorMessage %} govuk-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}" {{- govukAttributes(params.formGroup.attributes) }}>
-{% if hasFieldset %}
-  {# We override the fieldset's role to 'group' because otherwise JAWS does not
+<div class="govuk-form-group {%- if params.errorMessage %} govuk-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
+{% if params.fieldset %}
+{#- We override the fieldset's role to 'group' because otherwise JAWS does not
     announce the description for a fieldset comprised of text inputs, but
     adding the role to the fieldset always makes the output overly verbose for
     radio buttons or checkboxes. -#}
-  {{ govukFieldset({
+  {% call govukFieldset({
     describedBy: describedBy,
     classes: params.fieldset.classes,
     role: 'group',
     attributes: params.fieldset.attributes,
-    legend: params.fieldset.legend,
-    html: innerHtml | trim
-  }) | trim | indent(2) }}
+    legend: params.fieldset.legend
+  }) %}
+  {{ innerHtml | trim | safe }}
+  {% endcall %}
 {% else %}
-  {{ innerHtml | safe | trim }}
+  {{ innerHtml | trim | safe }}
 {% endif %}
 </div>
