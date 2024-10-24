@@ -1,6 +1,5 @@
-import { mergeConfigs } from '../../common/index.mjs';
+import { mergeConfigs, setFocus } from '../../common/index.mjs';
 import { normaliseDataset } from '../../common/normalise-dataset.mjs';
-import { ElementError } from '../../errors/index.mjs';
 import { GOVUKFrontendComponent } from '../../govuk-frontend-component.mjs';
 
 /**
@@ -10,38 +9,16 @@ import { GOVUKFrontendComponent } from '../../govuk-frontend-component.mjs';
  */
 class NotificationBanner extends GOVUKFrontendComponent {
   /**
-   * @param {Element | null} $module - HTML element to use for notification banner
+   * @param {Element | null} $root - HTML element to use for notification banner
    * @param {NotificationBannerConfig} [config] - Notification banner config
    */
-  constructor($module, config = {}) {
-    super();
-    this.$module = void 0;
+  constructor($root, config = {}) {
+    super($root);
     this.config = void 0;
-    if (!($module instanceof HTMLElement)) {
-      throw new ElementError({
-        componentName: 'Notification banner',
-        element: $module,
-        identifier: 'Root element (`$module`)'
-      });
+    this.config = mergeConfigs(NotificationBanner.defaults, config, normaliseDataset(NotificationBanner, this.$root.dataset));
+    if (this.$root.getAttribute('role') === 'alert' && !this.config.disableAutoFocus) {
+      setFocus(this.$root);
     }
-    this.$module = $module;
-    this.config = mergeConfigs(NotificationBanner.defaults, config, normaliseDataset($module.dataset));
-    this.setFocus();
-  }
-  setFocus() {
-    if (this.config.disableAutoFocus) {
-      return;
-    }
-    if (this.$module.getAttribute('role') !== 'alert') {
-      return;
-    }
-    if (!this.$module.getAttribute('tabindex')) {
-      this.$module.setAttribute('tabindex', '-1');
-      this.$module.addEventListener('blur', () => {
-        this.$module.removeAttribute('tabindex');
-      });
-    }
-    this.$module.focus();
   }
 }
 
@@ -54,9 +31,20 @@ class NotificationBanner extends GOVUKFrontendComponent {
  *   applies if the component has a `role` of `alert` – in other cases the
  *   component will not be focused on page load, regardless of this option.
  */
+
+/**
+ * @typedef {import('../../common/index.mjs').Schema} Schema
+ */
 NotificationBanner.moduleName = 'govuk-notification-banner';
 NotificationBanner.defaults = Object.freeze({
   disableAutoFocus: false
+});
+NotificationBanner.schema = Object.freeze({
+  properties: {
+    disableAutoFocus: {
+      type: 'boolean'
+    }
+  }
 });
 
 export { NotificationBanner };
