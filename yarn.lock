@@ -47,6 +47,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@azure/core-auth@npm:1.7.2":
+  version: 1.7.2
+  resolution: "@azure/core-auth@npm:1.7.2"
+  dependencies:
+    "@azure/abort-controller": ^2.0.0
+    "@azure/core-util": ^1.1.0
+    tslib: ^2.6.2
+  checksum: dcbba47f32e4cc929e078fd5d714af43185f3781ff5c19f01cba9e0d9078690e716be8172dd77a13aa3a81380d338a678b974bc5cbaa2e0d8629fb262ee3f0df
+  languageName: node
+  linkType: hard
+
 "@azure/core-auth@npm:^1.3.0, @azure/core-auth@npm:^1.5.0":
   version: 1.5.0
   resolution: "@azure/core-auth@npm:1.5.0"
@@ -130,21 +141,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@azure/core-rest-pipeline@npm:1.10.1":
-  version: 1.10.1
-  resolution: "@azure/core-rest-pipeline@npm:1.10.1"
+"@azure/core-rest-pipeline@npm:1.16.3":
+  version: 1.16.3
+  resolution: "@azure/core-rest-pipeline@npm:1.16.3"
   dependencies:
-    "@azure/abort-controller": "npm:^1.0.0"
-    "@azure/core-auth": "npm:^1.4.0"
-    "@azure/core-tracing": "npm:^1.0.1"
-    "@azure/core-util": "npm:^1.0.0"
-    "@azure/logger": "npm:^1.0.0"
-    form-data: "npm:^4.0.0"
-    http-proxy-agent: "npm:^5.0.0"
-    https-proxy-agent: "npm:^5.0.0"
-    tslib: "npm:^2.2.0"
-    uuid: "npm:^8.3.0"
-  checksum: d1c165047519c05b702184ffadf900a1f3eca032795b0f4f5b174c8257b663c1b1eab847236579dddcf637ea380896e17328ebf5022050441ee80672ad6c449d
+    "@azure/abort-controller": ^2.0.0
+    "@azure/core-auth": ^1.4.0
+    "@azure/core-tracing": ^1.0.1
+    "@azure/core-util": ^1.9.0
+    "@azure/logger": ^1.0.0
+    http-proxy-agent: ^7.0.0
+    https-proxy-agent: ^7.0.0
+    tslib: ^2.6.2
+  checksum: c37030759d39f3d3b9da85b81c108570c373fac43023fef54d2afda8ab4dd58fa74f48e5bbda8037f2382059629d2e489804694e33e4e0a839446bed48f2ceb9
   languageName: node
   linkType: hard
 
@@ -170,16 +179,6 @@ __metadata:
   dependencies:
     tslib: "npm:^2.2.0"
   checksum: ae4309f8ab0b52c37f699594d58ee095782649f538bd6a0ee03e3fea042f55df7ad95c2e6dec22f5b8c3907e4bcf98d6ca98faaf480d446b73d41bbc1519d891
-  languageName: node
-  linkType: hard
-
-"@azure/core-util@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@azure/core-util@npm:1.2.0"
-  dependencies:
-    "@azure/abort-controller": "npm:^1.0.0"
-    tslib: "npm:^2.2.0"
-  checksum: 58c7e3c9e9fda27242c1ab1dbfcf11eab52cc3e6459a2509fa5572a3faebf3f24c6bf9d92883cd80974119fc1e2c16c7bd2c71f20cfbe670405515c73fdb4093
   languageName: node
   linkType: hard
 
@@ -210,6 +209,16 @@ __metadata:
     "@azure/abort-controller": ^2.0.0
     tslib: ^2.6.2
   checksum: 9246dc5bd246e7b94883ea8130fce04e2f22abd1e94afcff7a3e92a4c2da5e9b382dbf89a606b21d70bc8b01c7c89c84e803ca9da27f78d87f72bdff91ec7380
+  languageName: node
+  linkType: hard
+
+"@azure/core-util@npm:^1.9.0":
+  version: 1.11.0
+  resolution: "@azure/core-util@npm:1.11.0"
+  dependencies:
+    "@azure/abort-controller": ^2.0.0
+    tslib: ^2.6.2
+  checksum: 91e3ec329d9eddaa66be5efb1785dad68dcb48dd779fca36e39db041673230510158ff5ca9ccef9f19c3e4d8e9af29f66a367cfc31a7b94d2541f80ef94ec797
   languageName: node
   linkType: hard
 
@@ -3399,7 +3408,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-web-snippet@npm:^1.0.1":
+"@microsoft/applicationinsights-web-snippet@npm:1.0.1":
   version: 1.0.1
   resolution: "@microsoft/applicationinsights-web-snippet@npm:1.0.1"
   checksum: e4e723031ce8fd9b21e0b52467ddc13f8f30e0ce3ec54b9f9f0946f9e2826050b97803f60322be3676218e77fff7234679cc488ee122e689f487bb2073cd95b4
@@ -4309,7 +4318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/glob@npm:^8.0.0":
+"@types/glob@npm:^8.1.0":
   version: 8.1.0
   resolution: "@types/glob@npm:8.1.0"
   dependencies:
@@ -4398,12 +4407,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jquery@npm:^3.5.29":
-  version: 3.5.29
-  resolution: "@types/jquery@npm:3.5.29"
+"@types/jquery@npm:^3.5.32":
+  version: 3.5.32
+  resolution: "@types/jquery@npm:3.5.32"
   dependencies:
-    "@types/sizzle": "npm:*"
-  checksum: 5e959762d6f7050b07b4387b6507a308113384566a77cfc4f8d0f54c2fb0a79f6bc8c057706c6aa4840cde56f32ad0e5814fb53c5f078c5db9e01670a1ecd535
+    "@types/sizzle": "*"
+  checksum: 7fe7251bda3fc9d80417ef7c88ad963ccb591706bca2fb84ea5d9600498a8f9911c32302f28fd1910bb212c34193f38f63818757a9833b70e1f46c3a98a17625
   languageName: node
   linkType: hard
 
@@ -4428,10 +4437,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.202":
-  version: 4.14.202
-  resolution: "@types/lodash@npm:4.14.202"
-  checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
+"@types/lodash@npm:^4.17.12":
+  version: 4.17.12
+  resolution: "@types/lodash@npm:4.17.12"
+  checksum: 7b564e4114f09ce5ae31a2e9493592baf20bb498507f3705c5d91cf838c2298b4f6a06f2d6c8dc608fcac63e210a2b7b13388c7a5e220e15688f813521030127
   languageName: node
   linkType: hard
 
@@ -5545,15 +5554,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"applicationinsights@npm:^2.2.2":
-  version: 2.9.2
-  resolution: "applicationinsights@npm:2.9.2"
+"applicationinsights@npm:^2.9.6":
+  version: 2.9.6
+  resolution: "applicationinsights@npm:2.9.6"
   dependencies:
-    "@azure/core-auth": ^1.5.0
-    "@azure/core-rest-pipeline": 1.10.1
-    "@azure/core-util": 1.2.0
+    "@azure/core-auth": 1.7.2
+    "@azure/core-rest-pipeline": 1.16.3
     "@azure/opentelemetry-instrumentation-azure-sdk": ^1.0.0-beta.5
-    "@microsoft/applicationinsights-web-snippet": ^1.0.1
+    "@microsoft/applicationinsights-web-snippet": 1.0.1
     "@opentelemetry/api": ^1.7.0
     "@opentelemetry/core": ^1.19.0
     "@opentelemetry/sdk-trace-base": ^1.19.0
@@ -5567,7 +5575,7 @@ __metadata:
   peerDependenciesMeta:
     applicationinsights-native-metrics:
       optional: true
-  checksum: d6e52080cb69d32bb8509bc04f774db94b0f25b34661c30d975e78639248fba684a615413bf2ad8ef34578947371660b3b3226effb656fc0d3e66fa8aa4fe38b
+  checksum: e748347fd8be67a911f521b98cfa1b2be871a23c69b7efa5f25cfc6ed3d73db5d45b9c241164d91c4892e7e3c4ee61d6fbdf4c76744307e10de58a557659194b
   languageName: node
   linkType: hard
 
@@ -7451,12 +7459,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"config@npm:^3.3.10":
-  version: 3.3.10
-  resolution: "config@npm:3.3.10"
+"config@npm:^3.3.12":
+  version: 3.3.12
+  resolution: "config@npm:3.3.12"
   dependencies:
     json5: ^2.2.3
-  checksum: c0b472fb9366418687c8ddfa167152dfbfd77bba698cc5d5f1eac3867282302c3d63aa299f403dbe75efc0c5ccd9c82526d73c69b85874d87457564d53ffe37c
+  checksum: db1b7718ffb0a8dc99cac003f31f6af99562362b8b25f2c72104465983d471e683ea25866308886723179248113a584e6ec3f67811e25e3c2b070bee592dd94d
   languageName: node
   linkType: hard
 
@@ -7519,13 +7527,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie-parser@npm:^1.4.6":
-  version: 1.4.6
-  resolution: "cookie-parser@npm:1.4.6"
+"cookie-parser@npm:^1.4.7":
+  version: 1.4.7
+  resolution: "cookie-parser@npm:1.4.7"
   dependencies:
-    cookie: "npm:0.4.1"
-    cookie-signature: "npm:1.0.6"
-  checksum: 1e5a63aa82e8eb4e02d2977c6902983dee87b02e87ec5ec43ac3cb1e72da354003716570cd5190c0ad9e8a454c9d3237f4ad6e2f16d0902205a96a1c72b77ba5
+    cookie: 0.7.2
+    cookie-signature: 1.0.6
+  checksum: 243fa13f217e793d20a57675e6552beea08c5989fcc68495d543997a31646875335e0e82d687b42dcfd466df57891d22bae7f5ba6ab33b7705ed2dd6eb989105
   languageName: node
   linkType: hard
 
@@ -7550,17 +7558,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.4.1":
-  version: 0.4.1
-  resolution: "cookie@npm:0.4.1"
-  checksum: bd7c47f5d94ab70ccdfe8210cde7d725880d2fcda06d8e375afbdd82de0c8d3b73541996e9ce57d35f67f672c4ee6d60208adec06b3c5fc94cebb85196084cf8
-  languageName: node
-  linkType: hard
-
 "cookie@npm:0.7.1":
   version: 0.7.1
   resolution: "cookie@npm:0.7.1"
   checksum: cec5e425549b3650eb5c3498a9ba3cde0b9cd419e3b36e4b92739d30b4d89e0b678b98c1ddc209ce7cf958cd3215671fd6ac47aec21f10c2a0cc68abd399d8a7
+  languageName: node
+  linkType: hard
+
+"cookie@npm:0.7.2":
+  version: 0.7.2
+  resolution: "cookie@npm:0.7.2"
+  checksum: 9bf8555e33530affd571ea37b615ccad9b9a34febbf2c950c86787088eb00a8973690833b0f8ebd6b69b753c62669ea60cec89178c1fb007bf0749abed74f93e
   languageName: node
   linkType: hard
 
@@ -10333,7 +10341,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.0.0, glob@npm:^10.2.2, glob@npm:^10.3.3":
+"glob@npm:^10.2.2, glob@npm:^10.3.3":
   version: 10.3.10
   resolution: "glob@npm:10.3.10"
   dependencies:
@@ -10361,6 +10369,22 @@ __metadata:
   bin:
     glob: dist/esm/bin.mjs
   checksum: bd7c0e30701136e936f414e5f6f82c7f04503f01df77408f177aa584927412f0bde0338e6ec541618cd21eacc57dde33e7b3c6c0a779cc1c6e6a0e14f3d15d9b
+  languageName: node
+  linkType: hard
+
+"glob@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "glob@npm:11.0.0"
+  dependencies:
+    foreground-child: ^3.1.0
+    jackspeak: ^4.0.1
+    minimatch: ^10.0.0
+    minipass: ^7.1.2
+    package-json-from-dist: ^1.0.0
+    path-scurry: ^2.0.0
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: 8a2dd914d5776987be5244624d9491bbcaf19f2387e06783737003ff696ebfd2264190c47014f8709c1c02d8bc892f17660cf986c587b107e194c0a3151ab333
   languageName: node
   linkType: hard
 
@@ -10927,6 +10951,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"https-proxy-agent@npm:^7.0.0, https-proxy-agent@npm:^7.0.4":
+  version: 7.0.5
+  resolution: "https-proxy-agent@npm:7.0.5"
+  dependencies:
+    agent-base: ^7.0.2
+    debug: 4
+  checksum: 2e1a28960f13b041a50702ee74f240add8e75146a5c37fc98f1960f0496710f6918b3a9fe1e5aba41e50f58e6df48d107edd9c405c5f0d73ac260dabf2210857
+  languageName: node
+  linkType: hard
+
 "https-proxy-agent@npm:^7.0.2":
   version: 7.0.2
   resolution: "https-proxy-agent@npm:7.0.2"
@@ -10934,16 +10968,6 @@ __metadata:
     agent-base: ^7.0.2
     debug: 4
   checksum: 088969a0dd476ea7a0ed0a2cf1283013682b08f874c3bc6696c83fa061d2c157d29ef0ad3eb70a2046010bb7665573b2388d10fdcb3e410a66995e5248444292
-  languageName: node
-  linkType: hard
-
-"https-proxy-agent@npm:^7.0.4":
-  version: 7.0.5
-  resolution: "https-proxy-agent@npm:7.0.5"
-  dependencies:
-    agent-base: ^7.0.2
-    debug: 4
-  checksum: 2e1a28960f13b041a50702ee74f240add8e75146a5c37fc98f1960f0496710f6918b3a9fe1e5aba41e50f58e6df48d107edd9c405c5f0d73ac260dabf2210857
   languageName: node
   linkType: hard
 
@@ -11801,6 +11825,15 @@ __metadata:
     "@pkgjs/parseargs":
       optional: true
   checksum: 350f6f311018bb175ffbe736b19c26ac0b134bb5a17a638169e89594eb0c24ab1c658ab3a2fda24ff63b3b19292e1a5ec19d2255bc526df704e8168d392bef85
+  languageName: node
+  linkType: hard
+
+"jackspeak@npm:^4.0.1":
+  version: 4.0.2
+  resolution: "jackspeak@npm:4.0.2"
+  dependencies:
+    "@isaacs/cliui": ^8.0.2
+  checksum: 210030029edfa1658328799ad88c3d0fc057c4cb8a069fc4137cc8d2cc4b65c9721c6e749e890f9ca77a954bb54f200f715b8896e50d330e5f3e902e72b40974
   languageName: node
   linkType: hard
 
@@ -13210,6 +13243,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lru-cache@npm:^11.0.0":
+  version: 11.0.1
+  resolution: "lru-cache@npm:11.0.1"
+  checksum: 6056230a99fb399234e82368b99586bd4740079e80649102f681b19337b7d8c6bc8dd7f8b8c59377c31d26deb89f548b717ae932e139b4b795879d920fccf820
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^4.0.1":
   version: 4.1.5
   resolution: "lru-cache@npm:4.1.5"
@@ -13812,6 +13852,15 @@ __metadata:
   dependencies:
     brace-expansion: "npm:^2.0.1"
   checksum: 253487976bf485b612f16bf57463520a14f512662e592e95c571afdab1442a6a6864b6c88f248ce6fc4ff0b6de04ac7aa6c8bb51e868e99d1d65eb0658a708b5
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:^10.0.0":
+  version: 10.0.1
+  resolution: "minimatch@npm:10.0.1"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: f5b63c2f30606091a057c5f679b067f84a2cd0ffbd2dbc9143bda850afd353c7be81949ff11ae0c86988f07390eeca64efd7143ee05a0dab37f6c6b38a2ebb6c
   languageName: node
   linkType: hard
 
@@ -15241,6 +15290,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-scurry@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "path-scurry@npm:2.0.0"
+  dependencies:
+    lru-cache: ^11.0.0
+    minipass: ^7.1.2
+  checksum: 9953ce3857f7e0796b187a7066eede63864b7e1dfc14bf0484249801a5ab9afb90d9a58fc533ebb1b552d23767df8aa6a2c6c62caf3f8a65f6ce336a97bbb484
+  languageName: node
+  linkType: hard
+
 "path-to-regexp@npm:>=0.1.10":
   version: 8.1.0
   resolution: "path-to-regexp@npm:8.1.0"
@@ -16586,12 +16645,12 @@ __metadata:
     "@types/csurf": ^1.9.36
     "@types/es6-promisify": ^6.0.1
     "@types/express": ^4.17.21
-    "@types/glob": ^8.0.0
+    "@types/glob": ^8.1.0
     "@types/helmet": ^4.0.0
     "@types/jest": ^29.5.11
     "@types/jest-when": ^3.5.5
-    "@types/jquery": ^3.5.29
-    "@types/lodash": ^4.14.202
+    "@types/jquery": ^3.5.32
+    "@types/lodash": ^4.17.12
     "@types/node": ^20.0.0
     "@types/nunjucks": ^3.2.6
     "@types/require-directory": ^2.1.6
@@ -16599,15 +16658,15 @@ __metadata:
     "@types/supertest": ^2.0.16
     "@typescript-eslint/eslint-plugin": ^6.21.0
     "@typescript-eslint/parser": ^6.21.0
-    applicationinsights: ^2.2.2
+    applicationinsights: ^2.9.6
     axios: ^1.7.7
     axios-debug-log: ^1.0.0
     babel-loader: ^9.1.3
     chai: ^4.5.0
     chai-as-promised: ^7.1.2
     codeceptjs: ^3.6.5
-    config: ^3.3.10
-    cookie-parser: ^1.4.6
+    config: ^3.3.12
+    cookie-parser: ^1.4.7
     copy-webpack-plugin: ^11.0.0
     css-loader: ^6.5.1
     csurf: ^1.11.0
@@ -16619,7 +16678,7 @@ __metadata:
     eslint-plugin-prettier: ^5.2.1
     express: ^4.21.1
     express-nunjucks: ^3.1.2
-    glob: ^10.0.0
+    glob: ^11.0.0
     govuk-frontend: ^5.0.0
     helmet: ^5.1.1
     html-webpack-plugin: ^5.5.4
