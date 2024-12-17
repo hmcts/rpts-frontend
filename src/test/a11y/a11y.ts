@@ -1,4 +1,5 @@
 import * as supertest from 'supertest';
+
 import { app } from '../../main/app';
 
 const pa11y = require('pa11y');
@@ -72,7 +73,7 @@ function expectNoErrors(messages: PallyIssue[]): void {
 
   if (errors.length > 0) {
     const errorsAsJson = `${JSON.stringify(errors, null, 2)}`;
-    console.error(`Accessibility issues found:`, errorsAsJson);
+    console.error('Accessibility issues found:', errorsAsJson);
     throw new Error(`There are accessibility issues:
 ${errorsAsJson}
 `);
@@ -110,4 +111,3 @@ describe('Accessibility', () => {
 
   // TODO: include each path of your application in accessibility checks
 });
-
