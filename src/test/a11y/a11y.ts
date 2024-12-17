@@ -86,7 +86,7 @@ function testAccessibility(url: string): void {
       try {
         console.log(`Starting accessibility test for URL: ${url}`);
         await ensurePageCallWillSucceed(url);
-        const result = await runPally(`http://localhost:${process.env.PORT || 3000}${url}`);
+        const result = await runPally(`http://localhost:${process.env.PORT || 3120}${url}`);
         expect(result.issues).toEqual(expect.any(Array));
         expectNoErrors(result.issues);
       } catch (err) {
