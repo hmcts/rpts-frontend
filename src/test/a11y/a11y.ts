@@ -42,7 +42,7 @@ function ensurePageCallWillSucceed(url: string): Promise<void> {
       throw new Error(`Call to ${url} resulted in a redirect to ${res.get('Location')}`);
     }
     if (res.serverError) {
-      throw new Error(`Call to ${url} resulted in internal server error`);
+      throw new Error(`Call to ${url} resulted in internal server error: ${res.serverError}`);
     }
   });
 }
