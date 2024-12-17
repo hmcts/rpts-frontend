@@ -77,6 +77,7 @@ Returns a NsplAddress entity which contains address lines and local authority in
 GET /v1/search/<postcode>
 ```
 
+
 ### NSPL Data - National Statistics Postcode Lookup
 
 The application uses the NSPL data to provide address information based on the postcode.
