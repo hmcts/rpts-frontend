@@ -129,11 +129,13 @@
     "serve-static": ">=1.15.0",
     "body-parser": ">=1.20.2",
     "axios/follow-redirects": ">=1.15.4",
-    "ip": "https://registry.npmjs.org/neoip/-/neoip-2.1.0.tgz"
+    "ip": "https://registry.npmjs.org/neoip/-/neoip-2.1.0.tgz",
+    "cacache": "^19.0.1",
+    "node-gyp": "^11.0.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "**/*.{js,ts}": "eslint --fix"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@4.6.0"
 }
