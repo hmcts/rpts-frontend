@@ -69,22 +69,27 @@ async function runPally(url: string): Promise<Pa11yResult> {
       timeout: 30000,
       wait: 1000,
       chromeLaunchConfig: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
-      }
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      },
     });
 
     // Extract only what we need to avoid circular references
     const safeResult: Pa11yResult = new Pa11yResult(
       result.documentTitle || '',
       result.pageUrl || '',
-      Array.isArray(result.issues) ? result.issues.map((issue: any) => new PallyIssue(
-        issue.code || '',
-        issue.context || '',
-        issue.message || '',
-        issue.selector || '',
-        issue.type || '',
-        issue.typeCode || 0
-      )) : []
+      Array.isArray(result.issues)
+        ? result.issues.map(
+            (issue: any) =>
+              new PallyIssue(
+                issue.code || '',
+                issue.context || '',
+                issue.message || '',
+                issue.selector || '',
+                issue.type || '',
+                issue.typeCode || 0
+              )
+          )
+        : []
     );
 
     console.log(`Pa11y result for URL: ${fullUrl} - Found ${safeResult.issues.length} issues`);
