@@ -58,19 +58,12 @@ async function runPally(url: string): Promise<Pa11yResult> {
   try {
     console.log(`Running Pa11y on URL: ${url}`);
 
-    // Make sure we have a complete URL for pa11y
-    const baseUrl = 'http://localhost';
-    const fullUrl = new URL(url, baseUrl).toString();
-
     // Run pa11y with appropriate options
-    const result = await pa11y(fullUrl, {
+    const result = await pa11y(url, {
       hideElements: '.govuk-footer__licence-logo, .govuk-header__logotype-crown',
-      // Add these options for better stability with pa11y 8.0.0
+      // Add some options for better stability with pa11y 8.0.0
       timeout: 30000,
       wait: 1000,
-      chromeLaunchConfig: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-      },
     });
 
     // Extract only what we need to avoid circular references
@@ -92,7 +85,7 @@ async function runPally(url: string): Promise<Pa11yResult> {
         : []
     );
 
-    console.log(`Pa11y result for URL: ${fullUrl} - Found ${safeResult.issues.length} issues`);
+    console.log(`Pa11y result for URL: ${url} - Found ${safeResult.issues.length} issues`);
     return safeResult;
   } catch (err) {
     console.error(`Pa11y error on URL ${url}:`, err);
@@ -122,10 +115,7 @@ function testAccessibility(url: string): void {
         console.log(`Starting accessibility test for URL: ${url}`);
         await ensurePageCallWillSucceed(url);
 
-        // Create a proper URL for pa11y
-        const fullUrl = url.startsWith('http') ? url : `http://localhost${url}`;
-
-        const result = await runPally(fullUrl);
+        const result = await runPally(url);
         expect(result.issues).toEqual(expect.any(Array));
         expectNoErrors(result.issues);
       } catch (err) {
