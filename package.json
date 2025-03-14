@@ -39,7 +39,7 @@
     "@types/require-directory": "^2.1.6",
     "@types/serve-favicon": "^2.5.7",
     "applicationinsights": "^2.9.6",
-    "axios": "^1.7.9",
+    "axios": "1.8.3",
     "config": "^3.3.12",
     "cookie-parser": "^1.4.7",
     "csurf": "^1.11.0",
@@ -113,7 +113,7 @@
     }
   },
   "resolutions": {
-    "axios": ">=1.7.7",
+    "axios": "1.8.3",
     "@azure/identity": ">=4.2.1",
     "tar": ">=6.2.1",
     "braces": ">=3.0.3",
