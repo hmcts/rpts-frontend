@@ -2533,7 +2533,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.25.1":
+"@eslint/js@npm:9.25.1, @eslint/js@npm:^9.25.1":
   version: 9.25.1
   resolution: "@eslint/js@npm:9.25.1"
   checksum: 10/ad5812889598de32d674ef60c0e61468ac5c7f3b6ecf98b0e29d1e88d7af8ba3aab255b8c0a46bbaf654047bbd2ee5aa033db9b53e330f97615093fcccde4cbb
@@ -4857,7 +4857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.31.1":
+"@typescript-eslint/eslint-plugin@npm:8.31.1, @typescript-eslint/eslint-plugin@npm:^8.31.1":
   version: 8.31.1
   resolution: "@typescript-eslint/eslint-plugin@npm:8.31.1"
   dependencies:
@@ -4878,7 +4878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^8.31.1":
+"@typescript-eslint/parser@npm:8.31.1, @typescript-eslint/parser@npm:^8.31.1":
   version: 8.31.1
   resolution: "@typescript-eslint/parser@npm:8.31.1"
   dependencies:
@@ -10174,6 +10174,13 @@ __metadata:
   version: 14.0.0
   resolution: "globals@npm:14.0.0"
   checksum: 10/03939c8af95c6df5014b137cac83aa909090c3a3985caef06ee9a5a669790877af8698ab38007e4c0186873adc14c0b13764acc754b16a754c216cc56aa5f021
+  languageName: node
+  linkType: hard
+
+"globals@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "globals@npm:16.0.0"
+  checksum: 10/aa05d569af9c763d9982e6885f3ac6d21c84cd54c9a12eeace55b3334d0631128f189902d34ae2a924694311f92d700dbd3e8e62e8a9e1094a882f9f8897149a
   languageName: node
   linkType: hard
 
@@ -16208,6 +16215,7 @@ __metadata:
     "@babel/core": "npm:^7.27.1"
     "@babel/eslint-parser": "npm:^7.27.1"
     "@babel/preset-env": "npm:^7.27.1"
+    "@eslint/js": "npm:^9.25.1"
     "@hmcts/info-provider": "npm:^1.2.3"
     "@hmcts/nodejs-healthcheck": "npm:^1.8.5"
     "@hmcts/nodejs-logging": "npm:^4.0.4"
@@ -16252,6 +16260,7 @@ __metadata:
     express: "npm:^5.1.0"
     express-nunjucks: "npm:^3.1.2"
     glob: "npm:^11.0.2"
+    globals: "npm:^16.0.0"
     govuk-frontend: "npm:5.9.0"
     helmet: "npm:^8.1.0"
     html-webpack-plugin: "npm:^5.6.3"
@@ -16284,6 +16293,7 @@ __metadata:
     ts-node: "npm:^10.9.2"
     tsconfig-paths: "npm:^4.2.0"
     typescript: "npm:^5.8.3"
+    typescript-eslint: "npm:^8.31.1"
     webpack: "npm:^5.99.7"
     webpack-cli: "npm:^6.0.1"
     webpack-dev-middleware: "npm:^7.4.2"
@@ -18273,6 +18283,20 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 10/2cc1bcf7d8c1237f6a16c04efc06637b2c5f2d74e58e84665445cf87668b85a21ab18dd751fa49eee6ae024b70326635d7b79ad37b1c370ed2fec6aeeeb52714
+  languageName: node
+  linkType: hard
+
+"typescript-eslint@npm:^8.31.1":
+  version: 8.31.1
+  resolution: "typescript-eslint@npm:8.31.1"
+  dependencies:
+    "@typescript-eslint/eslint-plugin": "npm:8.31.1"
+    "@typescript-eslint/parser": "npm:8.31.1"
+    "@typescript-eslint/utils": "npm:8.31.1"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0
+    typescript: ">=4.8.4 <5.9.0"
+  checksum: 10/becb67b353bf9e36a924f71dba7315bad1ae6c697dcbfa3510f2bacd7a95074ee5c56bb288c77f486a6b2345c92ca68201edb2145fafca6925842075224070d6
   languageName: node
   linkType: hard
 

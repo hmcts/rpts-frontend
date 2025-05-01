@@ -21,6 +21,7 @@
     "cichecks": "yarn && yarn build && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y"
   },
   "dependencies": {
+    "@eslint/js": "^9.25.1",
     "@hmcts/info-provider": "^1.2.3",
     "@hmcts/nodejs-healthcheck": "^1.8.5",
     "@hmcts/nodejs-logging": "^4.0.4",
@@ -46,6 +47,7 @@
     "express": "^5.1.0",
     "express-nunjucks": "^3.1.2",
     "glob": "^11.0.2",
+    "globals": "^16.0.0",
     "govuk-frontend": "5.9.0",
     "helmet": "^8.1.0",
     "jquery": "^3.7.1",
@@ -55,7 +57,8 @@
     "serve-favicon": "^2.5.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",

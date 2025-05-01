@@ -48,7 +48,7 @@ export class Helmet {
       throw new Error('Referrer policy configuration is required');
     }
 
-    // @ts-ignore
+    // @ts-ignore Valid helmet function
     app.use(helmet.referrerPolicy({ policy }));
   }
 }
