@@ -7,5 +7,6 @@ RUN yarn install \
 FROM base as runtime
 RUN rm -rf webpack/ webpack.config.js
 COPY --from=base $WORKDIR/src/main ./src/main
+RUN yarn build:ts
 
 EXPOSE 3120
