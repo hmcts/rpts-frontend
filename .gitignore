@@ -21,10 +21,10 @@ node_modules/
 functional-output
 smoke-output
 
-src/main/public/assets/images/lib/*
-src/main/public/js/lib/**/*.js
-src/main/public/stylesheets/lib/*
 src/main/resources/localhost-ssl
+
+src/main/public/
+src/main/views/govuk/
 
 node-rpm-packaging/
 mochawesome-report/
