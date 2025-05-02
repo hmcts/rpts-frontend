@@ -6,12 +6,11 @@
     "node": ">=20.16.0"
   },
   "scripts": {
-    "start": "NODE_ENV=production yarn node src/main/server.js",
+    "start": "NODE_ENV=production ./node_modules/.bin/ts-node -r tsconfig-paths/register src/main/server.ts",
     "start:dev": "nodemon --config nodemon.json",
     "lint": "sass-lint -v -q && eslint . --ext .js,.ts",
     "build": "yarn webpack --config webpack.config.js",
     "build:prod": "NODE_ENV=production yarn webpack --mode production --config webpack.config.js",
-    "build:ts": "tsc -P . --outDir ./src/main",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:routes": "jest -c jest.routes.config.js",

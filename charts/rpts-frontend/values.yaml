@@ -1,5 +1,7 @@
 nodejs:
   applicationPort: 3120
+  cpuRequests: 100m
+  memoryLimits: 1024Mi
   aadIdentityName: rpts
   ingressHost: rpts.{{ .Values.global.environment }}.platform.hmcts.net
   image: 'hmctspublic.azurecr.io/rpts/frontend:latest'
