@@ -4,4 +4,4 @@ services:
   api:
     url: RPTS_API_URL
 appInsights:
-  instrumentationKey: APPINSIGHTS_KEY
+  app-insights-connection-string: APPINSIGHTS_CONNECTION_STRING
