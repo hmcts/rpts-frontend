@@ -4,4 +4,4 @@ services:
   api:
     url: 'http://localhost:4000'
 appInsights:
-  instrumentationKey: false
+  app-insights-connection-string: false

@@ -1,6 +1,5 @@
-import { expect } from 'chai';
-
 import { config as testConfig } from '../../config';
+import assert from 'assert';
 
 const { I } = inject();
 
@@ -38,15 +37,18 @@ Then('I should see the text {string}', (text: string) => {
 });
 
 Then('I should see the 4 char code {string}', async (code: string) => {
-  expect(code).equal(await I.grabValueFrom('#fourCharCode'));
+  const actual = await I.grabValueFrom('#fourCharCode');
+  assert.strictEqual(actual, code);
 });
 
 Then('I should see the 9 char code {string}', async (code: string) => {
-  expect(code).equal(await I.grabValueFrom('#nineCharCode'));
+  const actual = await I.grabValueFrom('#nineCharCode');
+  assert.strictEqual(actual, code);
 });
 
 Then('I should see the address {string}', async (address: string) => {
-  expect(address).equal(await I.grabValueFrom('#addressesList'));
+  const actual = await I.grabValueFrom('#addressesList');
+  assert.strictEqual(actual, address);
 });
 
 Then('I should see the error message containing {string}', async (errMsg: string) => {
