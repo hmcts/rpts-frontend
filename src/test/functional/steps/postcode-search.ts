@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { config as testConfig } from '../../config';
 
 const { I } = inject();
@@ -38,14 +36,17 @@ Then('I should see the text {string}', (text: string) => {
 });
 
 Then('I should see the 4 char code {string}', async (code: string) => {
+  const { expect } = await import('chai');
   expect(code).equal(await I.grabValueFrom('#fourCharCode'));
 });
 
 Then('I should see the 9 char code {string}', async (code: string) => {
+  const { expect } = await import('chai');
   expect(code).equal(await I.grabValueFrom('#nineCharCode'));
 });
 
 Then('I should see the address {string}', async (address: string) => {
+  const { expect } = await import('chai');
   expect(address).equal(await I.grabValueFrom('#addressesList'));
 });
 
