@@ -15,6 +15,7 @@ module.exports = tslint.config(
       'jest.*config.js',
       '**/**.min.js',
       'src/main/views/govuk/**',
+      'functional-output/**',
     ],
   },
   eslint.configs.recommended,
