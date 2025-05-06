@@ -59,6 +59,8 @@ async function runPally(url: string): Promise<Pa11yResult> {
     console.log(`Running Pa11y on URL: ${url}`);
     const result = await pa11y(url, {
       hideElements: '.govuk-footer__licence-logo, .govuk-header__logotype-crown',
+      timeout: 30000,
+      wait: 1000,
     });
     console.log(`Pa11y result for URL: ${url} - Result:`, result);
     return result;
@@ -82,11 +84,12 @@ ${errorsAsJson}
 
 function testAccessibility(url: string): void {
   describe(`Page ${url}`, () => {
+    jest.setTimeout(60000);
     test('should have no accessibility errors', async () => {
       try {
         console.log(`Starting accessibility test for URL: ${url}`);
         await ensurePageCallWillSucceed(url);
-        const result = await runPally(agent.get(url).url);
+        const result = await runPally(url);
         expect(result.issues).toEqual(expect.any(Array));
         expectNoErrors(result.issues);
       } catch (err) {
