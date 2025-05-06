@@ -1,6 +1,6 @@
 # rpts-frontend
 
-## Table of Contents
+## Table of Contents.
 
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
