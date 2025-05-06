@@ -12,6 +12,7 @@ export const config: CodeceptJS.Config = {
   plugins: {
     allure: {
       enabled: true,
+      require: '@codeceptjs/allure-legacy',
     },
     pauseOnFail: {
       enabled: !testConfig.TestHeadlessBrowser,
@@ -28,3 +29,4 @@ export const config: CodeceptJS.Config = {
     },
   },
 };
+
