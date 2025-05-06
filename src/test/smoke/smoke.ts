@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { expect } from 'chai';
+import { expect } from '@jest/globals';
 
 const testUrl = process.env.TEST_URL || 'http://localhost:3120';
 
@@ -11,8 +11,8 @@ describe('Smoke Test', () => {
           'Accept-Encoding': 'gzip',
         },
       });
-      expect(response.status).eq(200);
-      expect(response.data).includes('GOV.UK');
+      expect(response.status).toEqual(200);
+      expect(response.data).toContain('GOV.UK');
     });
   });
 });
