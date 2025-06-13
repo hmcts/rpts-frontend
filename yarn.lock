@@ -3222,6 +3222,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/hashes@npm:^1.1.5":
+  version: 1.8.0
+  resolution: "@noble/hashes@npm:1.8.0"
+  checksum: 10/474b7f56bc6fb2d5b3a42132561e221b0ea4f91e590f4655312ca13667840896b34195e2b53b7f097ec080a1fdd3b58d902c2a8d0fbdf51d2e238b53808a177e
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -3885,6 +3892,15 @@ __metadata:
     "@opentelemetry/api-logs": "npm:^0.57.1"
     winston-transport: "npm:4.*"
   checksum: 10/438a14d595cc56a7afef60ade0e04b369e52825e8dbf1ec3264a0d2e0e7924fefe2b1f459dd91c36b0b65b315eab8a5ac004ea742fb923352a2039293892ea39
+  languageName: node
+  linkType: hard
+
+"@paralleldrive/cuid2@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "@paralleldrive/cuid2@npm:2.2.2"
+  dependencies:
+    "@noble/hashes": "npm:^1.1.5"
+  checksum: 10/40ee269d6e47b4fed7706a2e4da7c27c3c668ebc969110d6d112277b6b16a67cce0503b53b9943f2c55035a72d225f77ea5541e03396d6429eec9252137a53b7
   languageName: node
   linkType: hard
 
@@ -6267,6 +6283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"balanced-match@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "balanced-match@npm:3.0.1"
+  checksum: 10/0abdcc7862a8295f10e1d8b743b41481996b9064e695da039787666a81d6940f70c0e9a21bca8c163fced6ebcc263d60a773075ffb03fb30343663f21e60fb79
+  languageName: node
+  linkType: hard
+
 "bare-events@npm:^2.2.0, bare-events@npm:^2.5.4":
   version: 2.5.4
   resolution: "bare-events@npm:2.5.4"
@@ -6432,6 +6455,15 @@ __metadata:
   version: 1.0.0
   resolution: "boolbase@npm:1.0.0"
   checksum: 10/3e25c80ef626c3a3487c73dbfc70ac322ec830666c9ad915d11b701142fab25ec1e63eff2c450c74347acfd2de854ccde865cd79ef4db1683f7c7b046ea43bb0
+  languageName: node
+  linkType: hard
+
+"brace-expansion@npm:4.0.1":
+  version: 4.0.1
+  resolution: "brace-expansion@npm:4.0.1"
+  dependencies:
+    balanced-match: "npm:^3.0.0"
+  checksum: 10/774daa3c686cc237e64dc1de52053f2355130bab7c1e246d243798f6698389d39d3ff878405546b4ab4fa4718613ea4748dc951059d6d21543d5f38ed30ac15b
   languageName: node
   linkType: hard
 
@@ -10083,6 +10115,17 @@ __metadata:
     combined-stream: "npm:^1.0.6"
     mime-types: "npm:^2.1.12"
   checksum: 10/1b6f3ccbf4540e535887b42218a2431a3f6cfdea320119c2affa2a7a374ad8fdd1e60166fc865181f45d49b1684c3e90e7b2190d3fe016692957afb9cf0d0d02
+  languageName: node
+  linkType: hard
+
+"formidable@npm:3.5.4":
+  version: 3.5.4
+  resolution: "formidable@npm:3.5.4"
+  dependencies:
+    "@paralleldrive/cuid2": "npm:^2.2.2"
+    dezalgo: "npm:^1.0.4"
+    once: "npm:^1.4.0"
+  checksum: 10/4645e6ce3d8bbefd3dd873dcd6211362da3bf8a04c8426d7f454c238be0142975f02e5bdbc792fdbd2be493fdcf5442fe01d9a246bd8c3fd8e779738290cc630
   languageName: node
   linkType: hard
 
@@ -17023,6 +17066,7 @@ __metadata:
     axios: "npm:1.9.0"
     axios-debug-log: "npm:^1.0.0"
     babel-loader: "npm:^10.0.0"
+    brace-expansion: "npm:4.0.1"
     chai: "npm:5.2.0"
     chai-as-promised: "npm:^8.0.1"
     codeceptjs: "npm:^3.7.3"
@@ -17038,6 +17082,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.6"
     express: "npm:^5.1.0"
     express-nunjucks: "npm:^3.1.2"
+    formidable: "npm:3.5.4"
     glob: "npm:^11.0.2"
     globals: "npm:^16.0.0"
     govuk-frontend: "npm:5.10.1"
