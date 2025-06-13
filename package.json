@@ -41,6 +41,7 @@
     "@types/serve-favicon": "^2.5.7",
     "applicationinsights": "3.7.0",
     "axios": "1.9.0",
+    "brace-expansion": "4.0.1",
     "config": "^3.3.12",
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
@@ -115,7 +116,6 @@
   },
   "resolutions": {
     "formidable": "3.5.4",
-    "brace-expansion": "4.0.1",
     "cross-spawn": "7.0.6"
   },
   "husky": {
