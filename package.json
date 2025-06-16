@@ -116,8 +116,7 @@
   },
   "resolutions": {
     "formidable": "3.5.4",
-    "cross-spawn": "7.0.6",
-    "brace-expansion": "4.0.1"
+    "cross-spawn": "7.0.6"
   },
   "husky": {
     "hooks": {
