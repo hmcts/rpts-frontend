@@ -7,7 +7,7 @@ def product = "rpts"
 def component = "frontend"
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def branchesToSync = ['demo']
+def branchesToSync = ['demo', 'perftest', 'ithc']
 
 withPipeline(type, product, component) {
   disableLegacyDeployment()
