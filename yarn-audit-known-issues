@@ -1,1 +1,0 @@
-{"value":"micromatch","children":{"ID":1098681,"Issue":"Regular Expression Denial of Service (ReDoS) in micromatch","URL":"https://github.com/advisories/GHSA-952p-6rrq-rcjv","Severity":"moderate","Vulnerable Versions":"<4.0.8","Tree Versions":["4.0.5"],"Dependents":["fast-glob@npm:3.3.2"]}}
