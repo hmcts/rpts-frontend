@@ -118,7 +118,7 @@
     "formidable": "3.5.4",
     "cross-spawn": "7.0.6",
     "micromatch": "4.0.8",
-    "superagent": "10.2.2",
+    "superagent": "10.2.3",
     "form-data": "4.0.4"
   },
   "husky": {
