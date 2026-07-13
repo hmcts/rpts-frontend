@@ -22,11 +22,11 @@ export const config = {
       getPageTimeout: 30000,
       waitForTimeout: 30000,
       windowSize: '1366x784',
-      ignoreHTTPSErrors: true
-    }
+      ignoreHTTPSErrors: true,
+    },
   },
   Gherkin: {
     features: './features/**/*.feature',
     steps: '../functional/steps/*.ts',
-  }
+  },
 };

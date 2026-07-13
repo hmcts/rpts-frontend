@@ -7,5 +7,5 @@ module.exports = {
     '^.+\\.ts?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  modulePathIgnorePatterns: ["src/test/unit/utils"]
+  modulePathIgnorePatterns: ['src/test/unit/utils'],
 };
