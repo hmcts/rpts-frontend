@@ -1,4 +1,3 @@
-
 export interface Logger {
   silly(arg: any): void;
   debug(arg: any): void;
@@ -6,9 +5,5 @@ export interface Logger {
   info(arg: any): void;
   warn(arg: any): void;
   error(arg: any): void;
-  log(arg: {
-    level: 'silly' | 'debug' | 'verbose' | 'info' | 'warn' | 'error';
-    message: any;
-  }): void;
+  log(arg: { level: 'silly' | 'debug' | 'verbose' | 'info' | 'warn' | 'error'; message: any }): void;
 }
-

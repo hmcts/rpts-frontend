@@ -55,7 +55,7 @@ module.exports = tslint.config(
       '@typescript-eslint/no-var-requires': 0,
       '@typescript-eslint/no-explicit-any': 0,
       '@typescript-eslint/no-unused-expressions': ['error', { allowTernary: true }],
-      '@typescript-eslint/no-require-imports': 'off'
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
   {
@@ -83,13 +83,13 @@ module.exports = tslint.config(
     rules: {
       'linebreak-style': ['error', 'unix'],
       semi: ['error', 'always'],
-      'no-multiple-empty-lines': ['error', { max: 1 }]
+      'no-multiple-empty-lines': ['error', { max: 1 }],
     },
   },
   {
     files: ['**/*.test.ts'],
     rules: {
-      '@typescript-eslint/no-unused-expressions': 'off'
+      '@typescript-eslint/no-unused-expressions': 'off',
     },
   }
 );
