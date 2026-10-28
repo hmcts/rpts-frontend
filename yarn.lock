@@ -3688,7 +3688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.19.2":
+"@types/node@npm:24.19.2":
   version: 24.19.2
   resolution: "@types/node@npm:24.19.2"
   dependencies:
@@ -12757,7 +12757,7 @@ __metadata:
     "@types/jest-when": "npm:^3.5.5"
     "@types/jquery": "npm:^3.5.34"
     "@types/lodash": "npm:^4.17.27"
-    "@types/node": "npm:^24.19.2"
+    "@types/node": "npm:24.19.2"
     "@types/nunjucks": "npm:^3.2.6"
     "@types/require-directory": "npm:^2.1.7"
     "@types/serve-favicon": "npm:^2.5.7"
