@@ -120,7 +120,7 @@
     "@grpc/grpc-js": "1.14.7",
     "@opentelemetry/core": "2.8.0",
     "brace-expansion@npm:^5.0.5": "npm:5.0.12",
-    "follow-redirects": "1.16.1",
+    "follow-redirects": "1.16.2",
     "http-cache-semantics": "4.3.0",
     "ip-address": "10.7.4",
     "moment": "2.31.0"
