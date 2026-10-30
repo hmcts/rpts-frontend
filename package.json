@@ -122,7 +122,7 @@
     "brace-expansion@npm:^5.0.5": "npm:5.0.12",
     "follow-redirects": "1.16.2",
     "http-cache-semantics": "4.3.0",
-    "ip-address": "10.7.4",
+    "ip-address": "10.7.5",
     "moment": "2.31.0"
   },
   "lint-staged": {
