@@ -116,7 +116,7 @@
     }
   },
   "resolutions": {
-    "@azure/msal-node": "7.1.0",
+    "@azure/msal-node": "7.1.2",
     "@grpc/grpc-js": "1.14.7",
     "@opentelemetry/core": "2.8.0",
     "brace-expansion@npm:^5.0.5": "npm:5.0.12",
