@@ -5957,14 +5957,15 @@ __metadata:
   linkType: hard
 
 "codeceptjs@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "codeceptjs@npm:4.2.2"
+  version: 4.2.4
+  resolution: "codeceptjs@npm:4.2.4"
   dependencies:
     "@codeceptjs/configure": "npm:^4.0.0-beta.4"
     "@codeceptjs/helper": "npm:2.0.4"
     "@cucumber/cucumber-expressions": "npm:18"
     "@cucumber/gherkin": "npm:38.0.0"
     "@cucumber/messages": "npm:32.3.1"
+    "@jridgewell/trace-mapping": "npm:^0.3.31"
     "@modelcontextprotocol/sdk": "npm:^1.26.0"
     "@xmldom/xmldom": "npm:^0.9.12"
     acorn: "npm:8.15.0"
@@ -6015,7 +6016,7 @@ __metadata:
     codeceptjs: bin/codecept.js
     codeceptjs-mcp: bin/mcp-server.js
     codeceptq: bin/codeceptq.js
-  checksum: 10/17fe73dd3b665bc2963e536964bfd7ce36838e9e47a5b4ee740e2105c31a12161acf5ea095256236c3178d2402ba9bb89ac2def1cc9e1075b5283aed3eccba07
+  checksum: 10/e8b98709b89cc9889d8bf84931430304eebeec9e82a9780c85844ba005fecad53e3f0233981c04091c4439b0c5b31f26df7e1ec4161bc169dab03f212b516f84
   languageName: node
   linkType: hard
 
