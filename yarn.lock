@@ -9010,10 +9010,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ip-address@npm:10.7.5":
-  version: 10.7.5
-  resolution: "ip-address@npm:10.7.5"
-  checksum: 10/30e328a30851fa944260acd6a618c9a32e7a8f16ff033bab0e7da46beb8572fc9c77514a57e777ba9e0c4e571bab24842c10d2bab96b2856ab602e4ecdd669e1
+"ip-address@npm:10.7.7":
+  version: 10.7.7
+  resolution: "ip-address@npm:10.7.7"
+  checksum: 10/4402540ad5ff12c8e5baa01fe41fc582b0036e0103c4553c852413c8a2675a1721406f1a1c136157311cd48f40a7d0c444e6b8595d025c8ce8e1c45f0eb480a0
   languageName: node
   linkType: hard
 
